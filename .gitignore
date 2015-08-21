@@ -1,0 +1,10 @@
+/.directory
+/node_modules
+/bower_components
+/.idea
+/app.key.js
+/.divshot-cache
+/adminer.php
+/data.json
+/divshot.json
+/resources/images

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang='ru' ng-app='mapApp'>
+
+<head>
+    <title>Angular.js</title>
+    <meta charset='utf-8'>
+    <link rel='stylesheet' type='text/css' href='css/normalize.css'>
+    <link rel='stylesheet' type='text/css' href='global.css'>
+    <link rel='stylesheet' type='text/css' href='css/bootstrap.min.css'>
+
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+
+<body>
+<div class='container-fluid'>
+    <div class='content'>
+        <div class='sidebar'>
+            <div class='control-panel'>
+                <input class='form-control' placeholder='поиск' type='text' ng-model='search'>
+            </div>
+            <div>
+                <div ng-controller='ShowCityController' ng-show='$rootScope.showCityList' class="citylist">
+                    <ul class='citylist--list'>
+                        <li ng-click='$rootScope.showCityList = ! $rootScope.showCityList' class='list-group-item'
+                            ng-repeat='city in cities | filter:search'>
+                            <a ui-sref='location({ city: city.code })' class='list-title'>{{city.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class='location-container' ui-view></div>
+            </div>
+        </div>
+        <div class="control-tools">
+            <div class="control-tools--citybutton btn btn-default" ng-click='$rootScope.showCityList = ! $rootScope.showCityList'>Сменить
+                город
+            </div>
+        </div>
+        <div ng-controller="AuthController as ac">
+        <div class="control-tools login-status">
+        <div ng-if="ac.checkLogin() === true" class="control-tools--authbutton btn btn-primary">Личный кабинет</div>
+            <div ng-if="ac.checkLogin() === true" class="control-tools--authbutton btn btn-danger" ng-click="ac.logout()">Выйти</div>
+            <div ng-if="ac.checkLogin() === false" class="control-tools--authbutton btn btn-default" ng-click='ac.showModal = ! ac.showModal'>Войти</div>
+        </div>
+        <div class="auth-modal modal-dialog" ng-show="ac.showModal">
+            <div class='modal-body'>
+            <form name="loginForm " ng-submit="ac.login()">
+                <div> class="form-group">
+                    <input type="text" class="form-control" ng-model="ac.credentials.email" placeholder="Электронный ящик"/>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" ng-model="ac.credentials.password" placeholder="Пароль"/>
+                </div>
+                <button type="submit" class="btn-primary">Войти</button>
+            </form>
+            </div>
+        </div>
+        </div>
+            </div>
+        <div ng-controller='MapController' id='map'></div>
+    </div>
+</div>
+</body>
+<script src='http://maps.api.2gis.ru/2.0/loader.js?pkg=full' data-id='dgLoader'></script>
+<script src='js/vendor.js'></script>
+<script src='js/app.js'></script>
+
+</html>
