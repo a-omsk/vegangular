@@ -12,10 +12,10 @@
         return {
             restrict: 'AE',
             templateUrl: 'templates/form-template.html',
-            link: function (scope, elem, attrs) {
-                $(".form-rating").raty({score: attrs.score, number: attrs.number}).on('click', function(value){
-                    console.log(attrs.score);
-                })
+            link: function (scope) {
+                $(".form-rating").raty({click: function(score) {
+                    scope.locationData.rating = score;
+                }});
 
 
             },
@@ -31,7 +31,7 @@
                     $scope.locationData.specification = $scope.locationData.specification.toString();
 
                     locationService.postLocation($scope.locationData).then(function (data) {
-                        console.log(data);
+                        console.info(data);
                         $rootScope.$broadcast('locationAdded');
                     });
                     $rootScope.openForm = false;

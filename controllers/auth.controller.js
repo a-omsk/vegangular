@@ -6,9 +6,9 @@
         .module('mapApp.controllers')
         .controller('AuthController', AuthController);
 
-    AuthController.$inject = ['$scope', 'authService', '$localStorage'];
+    AuthController.$inject = ['authService', '$localStorage'];
 
-    function AuthController($scope, authService, $localStorage) {
+    function AuthController(authService, $localStorage) {
         function successAuth (res) {
             $localStorage.token = res.token;
             console.info('Your token:', $localStorage.token);

@@ -18,16 +18,18 @@
 
             var checkUrl = API_HOST + 'authenticate/user?token=' + $localStorage.token;
             return $http.get(checkUrl).success(function (data) {
-                console.log(data)
+                $localStorage.user = data.user;
             }).error(function (data) {
                 console.error(data);
                 delete $localStorage.token;
+                delete $localStorage.user;
             })
 
         };
 
         this.logout = function () {
             delete $localStorage.token;
+            delete $localStorage.user;
             return console.log("Session cleared");
         };
     }

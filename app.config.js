@@ -14,7 +14,7 @@
 
         if ($localStorage.token) {
             authService.checkLogin().then(function (data) {
-                console.info("Your account", data);
+                console.log(data);
             });
         }
 

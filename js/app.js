@@ -55,7 +55,7 @@
 
         if ($localStorage.token) {
             authService.checkLogin().then(function (data) {
-                console.info("Your account", data);
+                console.log(data);
             });
         }
 
@@ -126,16 +126,18 @@
 
             var checkUrl = API_HOST + 'authenticate/user?token=' + $localStorage.token;
             return $http.get(checkUrl).success(function (data) {
-                console.log(data)
+                $localStorage.user = data.user;
             }).error(function (data) {
                 console.error(data);
                 delete $localStorage.token;
+                delete $localStorage.user;
             })
 
         };
 
         this.logout = function () {
             delete $localStorage.token;
+            delete $localStorage.user;
             return console.log("Session cleared");
         };
     }
@@ -289,9 +291,9 @@
         .module('mapApp.controllers')
         .controller('AuthController', AuthController);
 
-    AuthController.$inject = ['$scope', 'authService', '$localStorage'];
+    AuthController.$inject = ['authService', '$localStorage'];
 
-    function AuthController($scope, authService, $localStorage) {
+    function AuthController(authService, $localStorage) {
         function successAuth (res) {
             $localStorage.token = res.token;
             console.info('Your token:', $localStorage.token);
@@ -578,10 +580,10 @@
         return {
             restrict: 'AE',
             templateUrl: 'templates/form-template.html',
-            link: function (scope, elem, attrs) {
-                $(".form-rating").raty({score: attrs.score, number: attrs.number}).on('click', function(value){
-                    console.log(attrs.score);
-                })
+            link: function (scope) {
+                $(".form-rating").raty({click: function(score) {
+                    scope.locationData.rating = score;
+                }});
 
 
             },
@@ -597,7 +599,7 @@
                     $scope.locationData.specification = $scope.locationData.specification.toString();
 
                     locationService.postLocation($scope.locationData).then(function (data) {
-                        console.log(data);
+                        console.info(data);
                         $rootScope.$broadcast('locationAdded');
                     });
                     $rootScope.openForm = false;

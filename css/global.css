@@ -31,19 +31,26 @@ div.auth-modal {
     z-index: 999;
     width: 400px;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(245, 245, 245, 0.9);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
 
+button.login-form-submit {
+    width: 50%;
+    margin: 0 25%;
 }
 
 ul.citylist--list {
     padding-left: 0px;
     overflow: auto;
-    height: 647px;
+    height: 610px;
 }
 
 div.location-container {
     overflow: auto;
-    height: 647px;
+    height: 610px;
 }
 
 li.list-group-item {
@@ -65,9 +72,8 @@ textarea.comment-body-area {
 }
 
 div.leaflet-popup-content-wrapper {
-    max-height: 200px!important;
+    max-height: 200px !important;
 }
-
 
 .location-form {
     background: whitesmoke;
