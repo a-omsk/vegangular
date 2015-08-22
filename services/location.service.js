@@ -35,9 +35,11 @@
         };
 
         this.postLocation = function (data) {
-            $http.post(API_HOST + 'locations/post', data).success(function (response) {
-                console.log (response);
-            })
+            if (data) {
+                return $http.post(API_HOST + 'locations/post', data).success(function (response) {
+                    console.log(response);
+                })
+            }
         }
     }
 })();

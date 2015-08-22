@@ -1,0 +1,13 @@
+<div class="baloon-dialog-content">
+    <div>
+        <h5 ng-if="$root.address">{{$root.address}}</h5>
+    </div>
+    <div>
+        <span ng-if="authorized">Хотите добавиить заведение в этой точке?</span>
+        <span ng-if="!authorized" >Для того, чтобы добавить заведение, пожалуйста авторизуйтесь</span>
+    </div>
+    <div>
+        <button class="btn btn-default" ng-if="authorized" ng-click='openForm()'>Добавить местоположение</button>
+        <button class="btn btn-default" ng-if="!authorized">Войти</button>
+    </div>
+</div>

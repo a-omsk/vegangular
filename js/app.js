@@ -8,7 +8,8 @@
             'mapApp.controllers',
             'ngCookies',
             'ui.router',
-            'ngStorage'
+            'ngStorage',
+            'checklist-model'
         ]);
 })();
 
@@ -101,7 +102,7 @@
 
   angular
     .module('mapApp')
-    .constant('API_KEY', 'rudcgu3317'); /* runsbe5363 */
+    .constant('API_KEY', 'rubnkm7490'); /* runsbe5363 rudcgu3317 */
 })();
  
 
@@ -233,22 +234,25 @@
         };
 
         this.postLocation = function (data) {
-            $http.post(API_HOST + 'locations/post', data).success(function (response) {
-                console.log (response);
-            })
+            if (data) {
+                return $http.post(API_HOST + 'locations/post', data).success(function (response) {
+                    console.log(response);
+                })
+            }
         }
     }
 })();
-;(function () {
+;
+(function () {
     'use strict';
 
     angular
         .module('mapApp.services')
         .service('mapService', mapService);
 
-    mapService.$inject = ['$http', 'API_HOST'];
+    mapService.$inject = ['$http', 'API_HOST', 'API_KEY'];
 
-    function mapService ($http, API_HOST) {
+    function mapService($http, API_HOST, API_KEY) {
         var map = null;
 
         this.cluster = null;
@@ -260,6 +264,12 @@
         this.getMapContainer = function () {
             return map;
         };
+
+        this.getObject = function (latlng) {
+            return $http.get("http://catalog.api.2gis.ru/geo/search?q=" + latlng.lng + ',' + latlng.lat + "&version=1.3&key=" + API_KEY).success(function (data) {
+                return data;
+            });
+        }
     }
 })();
 
@@ -396,100 +406,94 @@
         .module('mapApp.controllers')
         .controller('locationsListController', locationsListController);
 
-    locationsListController.$inject = ['$scope', '$stateParams', 'citiesListService', 'locationService', 'mapService'];
+    locationsListController.$inject = ['$http', '$scope', '$stateParams', 'citiesListService', 'locationService', 'mapService', '$compile'];
 
-    function locationsListController($scope, $stateParams, citiesListService, locationService, mapService) {
-        var map = null;
+    function locationsListController($http, $scope, $stateParams, citiesListService, locationService, mapService, $compile) {
         /**
          *       Get the map object from a service
          */
 
         $scope.$watch(function () {
             return mapService.getMapContainer()
-        }, function (data) {
-            if (data) {
-                map = data;
-                $scope.$broadcast('Map initializated');
-            }
-
-        });
-
-        $scope.$on("Map initializated", function () {
-
-            /**
-             *       Set current city value to a variable
-             */
-
-            var currentCity = citiesListService.getCurrentCity();
-
-            /**
-             *       Get all locations for selected city
-             */
-
-            locationService.getLocations($stateParams.city).then(function (callback) {
-                $scope.locations = callback.data;
-
-                var markerArray = [],
-                    veganIcon = DG.icon({
-                        iconUrl: 'resources/icons/marker1.png',
-                        iconSize: [48, 48]
-                    });
+        }, function (map) {
+            if (map) {
 
                 /**
-                 *       Prepare a marker objects for render on the map
+                 *       Set current city value to a variable
                  */
 
-                if (mapService.cluster) {
-                    mapService.cluster.remove();
-                }
+                var currentCity = citiesListService.getCurrentCity();
 
-                callback.data.forEach(function (value) {
-                    var geo = value.coordinates.replace(/[\[\]]/g, '').split(','),
-                        name = value.name,
-                        id = value.id;
+                /**
+                 *       Get all locations for selected city
+                 */
 
-                    var marker = DG.marker(geo, {
-                        icon: veganIcon
-                    }).bindPopup(name, {
-                        closeButton: false
-                    });
-                    marker.on('click', function () {
-                        window.location.href = '/#/locations/' + $stateParams.city + '/' + id;
-                    });
+                locationService.getLocations($stateParams.city).then(function (callback) {
+                    $scope.locations = callback.data;
 
-                    markerArray.push(marker);
+                    var markerArray = [],
+                        veganIcon = DG.icon({
+                            iconUrl: 'resources/icons/marker1.png',
+                            iconSize: [48, 48]
+                        });
 
-                    mapService.cluster = DG.featureGroup(markerArray);
+                    /**
+                     *       Prepare a marker objects for render on the map
+                     */
 
-                });
-
-
-                $scope.$watch(function () {
-                    return mapService.getMapContainer()
-                }, function (map) {
-
-                    mapService.cluster.addTo(map);
-
-                });
-            });
-
-            citiesListService.getCitiesList().then(function (callback) {
-
-                callback.data.result.forEach(function (value) {
-                    if (value.code === $stateParams.city) {
-                        if (currentCity !== $stateParams.city) {
-                            var centroid = DG.Wkt.toLatLngs(value.centroid)[0];
-                            mapService.cluster.remove();
-                            map.panTo([centroid.lat, centroid.lng]);
-                        }
-                        citiesListService.saveCurrentCity(value.code);
-
-                    } else {
-                        return false;
+                    if (mapService.cluster) {
+                        mapService.cluster.remove();
                     }
+
+                    callback.data.forEach(function (value) {
+                        var geo = value.coordinates.replace(/[\[\]]/g, '').split(','),
+                            name = value.name,
+                            id = value.id;
+
+                        var marker = DG.marker(geo, {
+                            icon: veganIcon
+                        }).bindPopup(name, {
+                            closeButton: false
+                        });
+                        marker.on('click', function () {
+                            window.location.href = '/#/locations/' + $stateParams.city + '/' + id;
+                        });
+
+                        markerArray.push(marker);
+
+                        mapService.cluster = DG.featureGroup(markerArray);
+
+                    });
+
+
+                    $scope.$watch(function () {
+                        return mapService.getMapContainer()
+                    }, function (map) {
+
+                        mapService.cluster.addTo(map);
+
+                    });
                 });
 
-            });
+                citiesListService.getCitiesList().then(function (callback) {
+
+                    callback.data.result.forEach(function (value) {
+                        if (value.code === $stateParams.city) {
+                            if (currentCity !== $stateParams.city) {
+                                var centroid = DG.Wkt.toLatLngs(value.centroid)[0];
+                                mapService.cluster.remove();
+                                map.panTo([centroid.lat, centroid.lng]);
+                            }
+                            citiesListService.saveCurrentCity(value.code);
+
+                        } else {
+                            return false;
+                        }
+                    });
+
+                });
+            }
+
         });
     }
 })();
@@ -505,14 +509,6 @@
 
     function MapController($scope, $http) {
 
-        //$http.get('form-template.html').success(function (data) {
-        //   map.on('dblclick', function (e) {
-        //        DG.popup()
-        //            .setLatLng([e.latlng.lat, e.latlng.lng])
-        //            .setContent(data)
-        //            .addTo(map);
-        //    });
-        //});
     }
 })();
 
@@ -572,19 +568,111 @@
 (function () {
     'use strict';
 
-angular
-	.module('mapApp.directives')
-	.directive('addLocationForm', function() {
-    	return {
-        	restrict: 'AE',
-        	template: 'templates/form-template.html',
-        	controller: function($scope, $element, $attrs) {
-        		$scope.addLocation = function () {
-        			console.log('saved');
-        		}
-        	}
-    };
-});
+    angular
+        .module('mapApp.controllers')
+        .directive('addLocationForm', addLocationForm);
+
+    addLocationForm.$inject = ['$rootScope', 'locationService', 'citiesListService'];
+
+    function addLocationForm($rootScope, locationService, citiesListService) {
+        return {
+            restrict: 'AE',
+            templateUrl: 'templates/form-template.html',
+            controller: function ($scope) {
+                var city = citiesListService.getCurrentCity();
+                $scope.locationData = {};
+                $scope.locationData.coordinates = $rootScope.latlng.lat + ', ' + $rootScope.latlng.lng;
+                $scope.locationData.address = $rootScope.address;
+                $scope.locationData.city = city;
+
+                $scope.addLocation = function () {
+                    console.log($scope.locationData);
+                    $scope.locationData.specification = $scope.locationData.specification.toString();
+
+                    locationService.postLocation($scope.locationData).then(function (data) {
+                        console.log(data);
+                        $state.transitionTo($state.current, $stateParams, {
+                            reload: true,
+                            inherit: false,
+                            notify: true
+                        });
+                    });
+                    $rootScope.openForm = false;
+                };
+
+                $scope.close = function () {
+                    $rootScope.openForm = false;
+                };
+            }
+        }
+    }
+
+})();
+
+;
+(function () {
+    'use strict';
+
+    angular
+        .module('mapApp.controllers')
+        .directive('baloonDialog', baloonDialog);
+
+    baloonDialog.$inject = ['$rootScope', '$localStorage'];
+
+    function baloonDialog($rootScope, $localStorage) {
+        return {
+            restrict: 'AE',
+            templateUrl: 'templates/baloon-dialog.html',
+            controller: function ($scope) {
+                $scope.authorized = !!$localStorage.token;
+                $scope.openForm = function () {
+                    $rootScope.openForm = true;
+                };
+            }
+        }
+    }
+
+})();
+
+;
+(function () {
+    'use strict';
+
+    angular
+        .module('mapApp.controllers')
+        .directive('enableTagging', enableTagging);
+
+    enableTagging.$inject = ['mapService', '$compile', '$rootScope'];
+
+    function enableTagging(mapService, $compile, $rootScope) {
+        return {
+            restrict: 'A',
+            controller: function ($scope) {
+                $scope.$watch(function () {
+                    return mapService.getMapContainer()
+                }, function (map) {
+                    if (map) {
+                        map.on('dblclick', function (e) {
+                            $rootScope.latlng = e.latlng;
+                            mapService.getObject(e.latlng).then(function (r) {
+                                console.log(r);
+                                $rootScope.address = null;
+                                if (r.data.result[0].attributes.street) {
+                                    $rootScope.address = r.data.result[0].attributes.street + " " + r.data.result[0].attributes.number;
+                                }
+                            });
+                            DG.popup({minWidth: 500})
+                                .setLatLng([e.latlng.lat, e.latlng.lng])
+                                .setContent("<div class='baloon-dialog' baloon-dialog></div>")
+                                .addTo(map);
+                            $compile(angular.element('.baloon-dialog'))($scope);
+                            $scope.$apply();
+                        });
+                    }
+                })
+            }
+        }
+    }
 })();
 
 $(document).ready(function() {
@@ -602,39 +690,3 @@ $(document).ready(function() {
     });
     changeMapHeight();
 });
-
- //$(".add-location-form").on("submit", function (event) {
-//    event.preventDefault();
-//
-//    var geoAddress, formData;
-//    var url = "http://catalog.api.2gis.ru/geo/search?q=" + e.latlng.lng + ',' + e.latlng.lat + "&version=1.3&key=" + apiKey;
-//
-//    $.getJSON(url, function (data) {
-//        var geoAddress = [data.result[0].attributes.street, data.result[0].attributes.number];
-//
-//        formData = {
-//            'coordinates': e.latlng.lat + ', ' + e.latlng.lng,
-//            'address': geoAddress.join(', '),
-//            'type': $('select[name=type]').val(),
-//            'name': $('input[name=name]').val(),
-//            'time': $('input[name=time]').val(),
-//            'specification': $('input[name=specification]').val(),
-//            'rating': $('input[name=rating]').val(),
-//            'description': $('textarea[name=description]').val(),
-//            'city': currentCity
-//        };
-//
-//        $.ajax({
-//            type: 'POST',
-//            url: 'http://api.lara.dev/locations/post',
-//            data: formData,
-//            dataType: 'json',
-//            encode: true
-//        }).done(function () {
-//            $("<h3 class='form--submitted'>Ваша форма отправлена</h1>").replaceAll($('.add-location-form'));
-//            DG.marker([e.latlng.lat, e.latlng.lng], {
-//                icon: veganIcon
-//            }).addTo(map);
-//        });
-//    });
-//});

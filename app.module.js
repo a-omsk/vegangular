@@ -8,6 +8,7 @@
             'mapApp.controllers',
             'ngCookies',
             'ui.router',
-            'ngStorage'
+            'ngStorage',
+            'checklist-model'
         ]);
 })();

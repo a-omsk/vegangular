@@ -1,12 +1,14 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var webserver = require('gulp-webserver');
+var uglify = require('gulp-uglify');
 var vendor = [
     'bower_components/jquery/dist/jquery.min.js',
     'bower_components/angular/angular.min.js',
     'bower_components/ui-router/release/angular-ui-router.min.js',
     'bower_components/angular-cookies/angular-cookies.min.js',
-    'bower_components/ngstorage/ngStorage.min.js'
+    'bower_components/ngstorage/ngStorage.min.js',
+    'bower_components/checklist-model/checklist-model.js'
 ];
 var app = [
     '**/*.module.js',
@@ -15,8 +17,7 @@ var app = [
     'services/*.js',
     'controllers/*.js',
     'directives/*.js',
-    'mapsize.js',
-    'maplogic.js'
+    'mapsize.js'
 ];
 
 gulp.task('webserver', function() {
@@ -24,8 +25,7 @@ gulp.task('webserver', function() {
         .pipe(webserver({
             host: '0.0.0.0',
             livereload: true,
-            directoryListing: false,
-            open: true
+            directoryListing: false
         }));
 });
 

@@ -1,23 +1,22 @@
 div.container-fluid {
-	padding: 0px;
+    padding: 0px;
 }
 
 div.sidebar {
-	position: fixed;
-	display: inline-block;
-	width: 300px;
-	height: 100%;
-	background-color: rgba(255, 255, 255, 0.8);
-	z-index: 10;
+    position: fixed;
+    display: inline-block;
+    width: 300px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 10;
 }
 
 div.control-tools {
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	z-index: 10;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 10;
 }
-
 
 div.login-status {
     position: absolute;
@@ -26,19 +25,19 @@ div.login-status {
 }
 
 div.auth-modal {
-	position: absolute;
-	left: 40%;
-	top: 10%;
-	z-index: 999;
-	width: 400px;
-	padding: 20px;
-	background: rgba(0,0,0, 0.8);
+    position: absolute;
+    left: 40%;
+    top: 10%;
+    z-index: 999;
+    width: 400px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
 
 }
 
 ul.citylist--list {
-	padding-left: 0px;
-	overflow: auto;
+    padding-left: 0px;
+    overflow: auto;
     height: 647px;
 }
 
@@ -48,19 +47,37 @@ div.location-container {
 }
 
 li.list-group-item {
-	background: none;
+    background: none;
 }
 
 div.location-details-container {
-	padding-left: 20px;
+    padding-left: 20px;
 }
 
 div.location-comments {
-	padding: 10px 10px 10px 20px;
+    padding: 10px 10px 10px 20px;
 }
 
 textarea.comment-body-area {
-	display: block;
-	width: 280px;
+    display: block;
+    width: 280px;
 
+}
+
+div.leaflet-popup-content-wrapper {
+    max-height: 200px!important;
+}
+
+
+.location-form {
+    background: whitesmoke;
+    z-index: 1000;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 5%;
+    left: 0;
+    right: 0;
+    width: 70%;
+    height: 80%;
 }

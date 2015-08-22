@@ -5,15 +5,16 @@
     <title>Angular.js</title>
     <meta charset='utf-8'>
     <link rel='stylesheet' type='text/css' href='css/normalize.css'>
-    <link rel='stylesheet' type='text/css' href='global.css'>
+    <link rel='stylesheet' type='text/css' href='css/global.css'>
     <link rel='stylesheet' type='text/css' href='css/bootstrap.min.css'>
 
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 
-<body>
+<body ng-cloak>
 <div class='container-fluid'>
     <div class='content'>
+        <add-location-form ng-if="$root.openForm" class="location-form"></add-location-form>
         <div class='sidebar'>
             <div class='control-panel'>
                 <input class='form-control' placeholder='поиск' type='text' ng-model='search'>
@@ -56,7 +57,7 @@
         </div>
         </div>
             </div>
-        <div ng-controller='MapController' id='map'></div>
+        <div ng-controller='MapController' id='map' enable-tagging></div>
     </div>
 </div>
 </body>
