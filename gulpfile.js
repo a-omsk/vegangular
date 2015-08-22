@@ -8,7 +8,8 @@ var vendor = [
     'bower_components/ui-router/release/angular-ui-router.min.js',
     'bower_components/angular-cookies/angular-cookies.min.js',
     'bower_components/ngstorage/ngStorage.min.js',
-    'bower_components/checklist-model/checklist-model.js'
+    'bower_components/checklist-model/checklist-model.js',
+    'bower_components/raty/lib/jquery.raty.js'
 ];
 var app = [
     '**/*.module.js',
