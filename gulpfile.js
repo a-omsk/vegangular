@@ -21,6 +21,11 @@ var app = [
     'mapsize.js'
 ];
 
+var styles = [
+  'bower_components/normalize.css/normalize.css',
+  'bower_components/bootstrap/dist/css/bootstrap.min.css'
+];
+
 gulp.task('webserver', function() {
     gulp.src('.')
         .pipe(webserver({
@@ -36,6 +41,11 @@ gulp.task('vendor', function() {
         .pipe(gulp.dest('js'))
 });
 
+gulp.task('styles', function() {
+    gulp.src(styles)
+        .pipe(gulp.dest('css'))
+});
+
 gulp.task('app', function() {
     gulp.src(app)
         .pipe(concat('app.js'))
@@ -44,6 +54,6 @@ gulp.task('app', function() {
 
 
 gulp.task('default', function() {
-    gulp.run('vendor', 'app', 'webserver');
+    gulp.run('vendor', 'styles', 'app', 'webserver');
     gulp.watch(app, ['app']);
 });

@@ -104,21 +104,26 @@ div.admin-content {
     bottom: 0;
     left: 0;
     background: whitesmoke;
-    border: 2px solid gray;
+    border: 1px solid rgb(225, 225, 225);
+    border-radius: 5px;
     width: 95%;
     height: 95%;
+    overflow: auto;
 }
 
 button.close-button {
-    float: right;
-    margin-top: 10px;
+    position: absolute;
+    z-index: 10;
+    right: 5%;
+    top:2%;
+
 }
 
 img.user-image {
     margin: auto;
 }
 
-.city-table {
-    width: 100%;
-    height: 300px;
+.user-table {
+    height: 370px;
+    overflow: scroll;
 }
