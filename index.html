@@ -13,6 +13,7 @@
 
 <body ng-cloak>
 <div class='container-fluid'>
+    <div ui-view="admin"></div>
     <div class='content'>
         <add-location-form ng-if="$root.openForm" class="location-form"></add-location-form>
         <div class='sidebar'>
@@ -32,33 +33,41 @@
             </div>
         </div>
         <div class="control-tools">
-            <div class="control-tools--citybutton btn btn-default" ng-click='$rootScope.showCityList = ! $rootScope.showCityList'>Сменить
+            <div class="control-tools--citybutton btn btn-default"
+                 ng-click='$rootScope.showCityList = ! $rootScope.showCityList'>Сменить
                 город
             </div>
         </div>
         <div ng-controller="AuthController as ac">
-        <div class="control-tools login-status">
-        <div ng-if="ac.checkLogin() === true" class="control-tools--authbutton btn btn-primary">Личный кабинет</div>
-            <div ng-if="ac.checkLogin() === true" class="control-tools--authbutton btn btn-danger" ng-click="ac.logout()">Выйти</div>
-            <div ng-if="ac.checkLogin() === false" class="control-tools--authbutton btn btn-default" ng-click='ac.showModal = ! ac.showModal'>Войти</div>
-        </div>
-        <div class="auth-modal modal-dialog card card-container" ng-show="ac.showModal">
-            <div class='modal-body'>
-            <form name="loginForm " ng-submit="ac.login()">
-                <div class="form-group">
-                    <input type="text" class="form-control" ng-model="ac.credentials.email" placeholder="Электронный ящик"/>
+            <div class="control-tools login-status">
+                <div ng-if="ac.checkLogin() === true" ng-click="ac.goAdminRoom()" class="control-tools--authbutton btn btn-primary">Личный кабинет
                 </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" ng-model="ac.credentials.password" placeholder="Пароль"/>
+                <div ng-if="ac.checkLogin() === true" class="control-tools--authbutton btn btn-danger"
+                     ng-click="ac.logout()">Выйти
                 </div>
-                <button type="submit" class="login-form-submit btn btn-primary">Войти</button>
-            </form>
+                <div ng-if="ac.checkLogin() === false" class="control-tools--authbutton btn btn-default"
+                     ng-click='ac.showModal = ! ac.showModal'>Войти
+                </div>
+            </div>
+            <div class="auth-modal modal-dialog card card-container" ng-show="ac.showModal">
+                <div class='modal-body'>
+                    <form name="loginForm " ng-submit="ac.login()">
+                        <div class="form-group">
+                            <input type="text" class="form-control" ng-model="ac.credentials.email"
+                                   placeholder="Электронный ящик"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" ng-model="ac.credentials.password"
+                                   placeholder="Пароль"/>
+                        </div>
+                        <button type="submit" class="login-form-submit btn btn-primary">Войти</button>
+                    </form>
+                </div>
             </div>
         </div>
-        </div>
-            </div>
-        <div ng-controller='MapController' id='map' enable-tagging></div>
     </div>
+    <div ng-controller='MapController' id='map' enable-tagging></div>
+</div>
 </div>
 </body>
 <script src='http://maps.api.2gis.ru/2.0/loader.js?pkg=full' data-id='dgLoader'></script>

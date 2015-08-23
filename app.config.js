@@ -20,17 +20,30 @@
 
         var centroid = [];
         var currentCity = $location.path().substr(11).replace(/\/([^/]*)$/, '');
-        citiesListService.saveCurrentCity(currentCity);
 
         DG.then(function () {
             citiesListService.getCitiesList().then(function (callback) {
-                callback.data.result.forEach(function (value) {
-                    if (value.code === currentCity) {
-                        centroid = DG.Wkt.toLatLngs(value.centroid)[0];
+
+                var cityObj = callback.data.result.filter(function(value){
+                    return value.code === currentCity
+                });
+
+                if (cityObj.length > 0) {
+                    centroid = DG.Wkt.toLatLngs(cityObj[0].centroid)[0];
+                } else {
+                    centroid = {
+                        lat: 54.981307,
+                        lng: 73.380373
+                    };
+                    currentCity = 'omsk';
+                }
+
+                citiesListService.saveCurrentCity(currentCity);
+
                         var map = DG.map('map', {
                             center: [centroid.lat, centroid.lng],
                             zoom: 14,
-                            minZoom: 12,
+                            minZoom: 13,
                             fullscreenControl: false,
                             zoomControl: false,
                             doubleClickZoom: false
@@ -42,8 +55,6 @@
                         DG.control.location({
                             position: 'bottomright'
                         }).addTo(map);
-                    }
-                });
             });
         });
     }

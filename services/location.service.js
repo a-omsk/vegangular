@@ -20,6 +20,12 @@
             return map;
         };
 
+        this.getAllLocations = function () {
+            return $http.get(API_HOST + 'locations', {cache: true}).success(function(data){
+                return data;
+            })
+        };
+
         this.getLocations = function (city, id) {
             if (!id) {
                 return $http.get(API_HOST + 'locations/' + city, {cache: true}).success(function (data) {
