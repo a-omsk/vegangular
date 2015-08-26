@@ -88,6 +88,18 @@ div.leaflet-popup-content-wrapper {
     height: 80%;
 }
 
+.edit-form.location-form {
+    width: 100%;
+    position: inherit;
+    padding: 0 10% 5% 10%;
+}
+
+div.edit-form-submit {
+    margin-left: 40%;
+    margin-right: 40%;
+    width: 20%;
+}
+
 .admin-page {
     position: absolute;
     z-index: 1000;

@@ -44,7 +44,6 @@
                                 }).bindPopup(name, {
                                     closeButton: false
                                 });
-
                                 marker.on('click', function () {
                                     window.location.href = '/#/locations/' + $stateParams.city + '/' + id;
                                 });

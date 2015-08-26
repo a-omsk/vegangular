@@ -14,9 +14,19 @@
 
         $scope.manageCity = null;
 
+        $scope.showEditForm = false;
+
+        vm.editID = null;
+
+        $scope.editLocation = function (id) {
+            vm.editID = id;
+            $scope.showEditForm = true;
+
+        };
+
         vm.currentCity = citiesListService.getCurrentCity();
         if (!vm.currentCity) {
-            currentCity = 'omsk';
+            vm.currentCity = 'omsk';
         }
 
         locationService.getAllLocations().then(function(response){
@@ -37,7 +47,7 @@
                     $scope.locations = response.data;
                 });
             }
-        })
+        });
 
         vm.username = $localStorage.user.name;
         vm.email = $localStorage.user.email;

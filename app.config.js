@@ -7,9 +7,9 @@
         .config(configure)
         .run(init);
 
-    init.$inject = ['citiesListService', 'authService', 'mapService', '$location', '$localStorage'];
+    init.$inject = ['citiesListService', 'authService', 'mapService', '$location', '$localStorage', '$rootScope'];
 
-    function init(citiesListService, authService, mapService, $location, $localStorage) {
+    function init(citiesListService, authService, mapService, $location, $localStorage, $rootScope) {
         console.log("your token", $localStorage.token);
 
         if ($localStorage.token) {
@@ -48,6 +48,8 @@
                             zoomControl: false,
                             doubleClickZoom: false
                         });
+
+                        $rootScope.map = map;
 
                         mapService.saveMapContainer(map);
 

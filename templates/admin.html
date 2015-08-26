@@ -6,7 +6,9 @@
                     Закрыть
                 </button>
                 <div class="col-md-3">
-                    <img class="user-image img-circle" alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" />
+                    <img class="user-image img-circle" alt="Bootstrap Image Preview"
+                         src="http://lorempixel.com/140/140/"/>
+
                     <div>
                         <h4>{{vm.username}}</h4>
                         <h5>{{vm.email}}</h5>
@@ -14,8 +16,8 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                            Заведения
-                        </h3>
+                                Заведения
+                            </h3>
                         </div>
                         <div class="panel-body">
                             Комментарии
@@ -28,12 +30,12 @@
                 <div class="col-md-9">
                     <div class="page-header">
                         <h1>
-                        LayoutIt!
-                        <small>Interface Builder for Bootstrap</small>
-                    </h1>
+                            LayoutIt!
+                            <small>Interface Builder for Bootstrap</small>
+                        </h1>
                     </div>
                     <div class='user-cities-list'>
-                        <div class="form-group">
+                        <div ng-if="!showEditForm" class="form-group">
                             <label for="sel1">Выберите город:</label>
                             <select ng-model='manageCity' class="form-control" id="sel1">
                                 <option ng-selected value='all'>Не выбран (Все добавленные заведения)</option>
@@ -41,45 +43,55 @@
                             </select>
                         </div>
                     </div>
-                    <div class="user-table table-responsive">
+                    <div class="edit-form" edit-location-form selectedId="{{vm.editID}}" visible="{{showEditForm}}"
+                         locations="{{locations}}"
+                         ng-if="showEditForm"></div>
+                    <div ng-if="!showEditForm" class="user-table table-responsive">
                         <table class="table">
                             <thead>
-                                <tr>
-                                    <th>
-                                        #
-                                    </th>
-                                    <th>
-                                        Город
-                                    </th>
-                                    <th>
-                                        Название заведения
-                                    </th>
-                                    <th>
-                                        Тип
-                                    </th>
-                                    <th>
-                                        Представлена еда
-                                    </th>
-                                </tr>
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+                                <th>
+                                    Город
+                                </th>
+                                <th>
+                                    Название заведения
+                                </th>
+                                <th>
+                                    Тип
+                                </th>
+                                <th>
+                                    Представлена еда
+                                </th>
+                                <th>
+
+                                </th>
+                            </tr>
                             </thead>
                             <tbody>
-                                <tr ng-click="clicked=true" ng-class="{'active':clicked}" ng-repeat="location in locations">
-                                    <td>
-                                        {{location.id}}
-                                    </td>
-                                    <td>
-                                        {{location.city}}
-                                    </td>
-                                    <td>
-                                        {{location.name}}
-                                    </td>
-                                    <td>
-                                        {{location.type}}
-                                    </td>
-                                    <td>
-                                        {{location.specification}}
-                                    </td>
-                                </tr>
+                            <tr ng-repeat="location in locations">
+                                <td>
+                                    {{location.id}}
+                                </td>
+                                <td>
+                                    {{location.city}}
+                                </td>
+                                <td>
+                                    {{location.name}}
+                                </td>
+                                <td>
+                                    {{location.type}}
+                                </td>
+                                <td>
+                                    {{location.specification}}
+                                </td>
+                                <td>
+                                    <span ng-click="editLocation(location.id)" class="glyphicon glyphicon-edit"></span>
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>

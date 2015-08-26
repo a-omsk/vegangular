@@ -13,7 +13,7 @@
             restrict: 'AE',
             templateUrl: 'templates/form-template.html',
             link: function (scope) {
-                $(".form-rating").raty({click: function(score) {
+                 angular.element(".form-rating").raty({click: function(score) {
                     scope.locationData.rating = score;
                 }});
 

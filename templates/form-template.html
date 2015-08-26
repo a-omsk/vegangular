@@ -1,26 +1,50 @@
 <div class="location-form">
     <form ng-submit='addLocation()' class='add-location-form'>
-        <button class="close" ng-click="close()">close</button>
-        <input class='form-control form-name' placeholder='введите название' ng-model='locationData.name' type='text' required>
-        <label for='form-address'>Адрес</label>
-                <input id="form-address" class='form-control' ng-model='locationData.address' type='text' required>
-        <label for='form-type'>Тип заведения</label>
-        <select id="form-type" class='form-control' ng-model='locationData.type' required>
-            <option value='cafe' selected='selected'>Кафе</option>
-            <option value='eatery'>Столовая</option>
-            <option value='restaurant'>Ресторан</option>
-            <option value='coffee'>Кофейня</option>
-            <option value='other'>Другое</option>
-        </select>
-        <input class='form-control form-time' placeholder='время работы' ng-model='locationData.time' required type='text'>
-        <label for='form-spec'>Представлена еда</label>
-        <input type='checkbox' id="form-spec" checklist-model='locationData.specification' value="vegetarian">
-        <label for='title'>Вегетарианская</label>
-        <input type='checkbox'  checklist-model='locationData.specification' value="vegan">
-        <label for='title'>Веганская</label>
-        <div class="form-rating" />
-        <textarea class='form-control form-description' placeholder='что в меню?' ng-model='locationData.description' required cols='30'
-              rows='10'></textarea>
-        <input class='btn-default btn location-form-submit' type='submit' value='Сохранить'>
+        <button class="btn btn-default close" ng-click="close()">close</button>
+        <div class="form-group">
+            <label for='form-name'>Тип заведения</label>
+            <input id="form-name" class='form-control form-name' placeholder='введите название'
+                   ng-model='locationData.name' type='text' required>
+        </div>
+        <div class="form-group">
+            <label for='form-address'>Адрес</label>
+            <input id="form-address" class='form-control' ng-model='locationData.address' type='text' required>
+        </div>
+        <div class="form-group">
+            <label for='form-type'>Тип заведения</label>
+            <select id="form-type" class='form-control' ng-model='locationData.type' required>
+                <option value='cafe' selected='selected'>Кафе</option>
+                <option value='eatery'>Столовая</option>
+                <option value='restaurant'>Ресторан</option>
+                <option value='coffee'>Кофейня</option>
+                <option value='other'>Другое</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input class='form-control form-time' placeholder='время работы' ng-model='locationData.time' required
+                   type='text'>
+        </div>
+        <div class="form-group">
+            <label>Представлена еда</label>
+            <label>
+                <input type='checkbox' checklist-model='locationData.specification' value="vegetarian">
+                Вегетарианская</label>
+            <label>
+                <input type='checkbox' checklist-model='locationData.specification' value="vegan">
+                Веганская</label>
+        </div>
+        <div class="form-group form-rating-group">
+            <label> Оцените заведение: </label>
+
+            <div class="form-rating"></div>
+        </div>
+        <div class="form-group">
+        <textarea class='form-control form-description' placeholder='что в меню?' ng-model='locationData.description'
+                  required cols='25'
+                  rows='10'></textarea>
+        </div>
+        <div class="col-sm-offset-2 edit-form-submit col-sm-10">
+            <input class='btn-default btn location-form-submit' type='submit' value='Сохранить'>
+        </div>
     </form>
 </div>

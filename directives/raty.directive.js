@@ -11,7 +11,9 @@
             scope: '@',
             restrict: 'AE',
             link: function (scope, elem) {
-                $(elem).raty({readOnly: true, score: 5, number: scope.location.rating});
+                if (scope.location) {
+                    $(elem).raty({readOnly: true, number: 5, score: scope.location.rating});
+                }
             }
         }
     }

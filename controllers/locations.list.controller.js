@@ -10,16 +10,14 @@
         .module('mapApp.controllers')
         .controller('locationsListController', locationsListController);
 
-    locationsListController.$inject = ['$http', '$scope', '$stateParams', 'citiesListService', 'locationService', 'mapService', '$compile'];
+    locationsListController.$inject = ['$rootScope', '$scope', '$stateParams', 'citiesListService', 'locationService', 'mapService'];
 
-    function locationsListController($http, $scope, $stateParams, citiesListService, locationService, mapService, $compile) {
+    function locationsListController($rootScope, $scope, $stateParams, citiesListService, locationService, mapService) {
         /**
          *       Get the map object from a service
          */
 
-        $scope.$watch(function () {
-            return mapService.getMapContainer()
-        }, function (map) {
+        $rootScope.$watch('map', function (map) {
             if (map) {
 
                 /**
@@ -33,12 +31,13 @@
                  */
 
                 locationService.getLocations($stateParams.city).then(function (callback) {
+                    $scope.markerArray = [];
                     $scope.locations = callback.data;
 
                     var markerArray = [],
                         veganIcon = DG.icon({
-                            iconUrl: 'resources/icons/marker1.png',
-                            iconSize: [48, 48]
+                            iconUrl: 'resources/icons/marker1.svg',
+                            iconSize: [56, 56]
                         });
 
                     /**
@@ -46,7 +45,7 @@
                      */
 
                     if (mapService.cluster) {
-                        mapService.cluster.remove();
+                        mapService.cluster.clearLayers();
                     }
 
                     callback.data.forEach(function (value) {
@@ -64,36 +63,28 @@
                         });
 
                         markerArray.push(marker);
+                        $scope.markerArray = markerArray;
 
                         mapService.cluster = DG.featureGroup(markerArray);
-
                     });
 
-
-                    $scope.$watch(function () {
-                        return mapService.getMapContainer()
-                    }, function (map) {
-
-                        mapService.cluster.addTo(map);
+                    $rootScope.$watch('map', function (map) {
+                           mapService.cluster.addTo(map);
 
                     });
                 });
 
                 citiesListService.getCitiesList().then(function (callback) {
 
-                    callback.data.result.forEach(function (value) {
-                        if (value.code === $stateParams.city) {
-                            if (currentCity !== $stateParams.city) {
-                                var centroid = DG.Wkt.toLatLngs(value.centroid)[0];
-                                mapService.cluster.remove();
-                                map.panTo([centroid.lat, centroid.lng]);
-                            }
-                            citiesListService.saveCurrentCity(value.code);
-
-                        } else {
-                            return false;
-                        }
+                    var newCity = callback.data.result.filter(function (value) {
+                        return value.code === $stateParams.city;
                     });
+
+                    if (currentCity !== $stateParams.city) {
+                        var centroid = DG.Wkt.toLatLngs(newCity[0].centroid)[0];
+                        map.panTo([centroid.lat, centroid.lng]);
+                    }
+                    citiesListService.saveCurrentCity(newCity[0].code);
 
                 });
             }

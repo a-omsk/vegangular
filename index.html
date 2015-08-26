@@ -40,7 +40,8 @@
         </div>
         <div ng-controller="AuthController as ac">
             <div class="control-tools login-status">
-                <div ng-if="ac.checkLogin() === true" ng-click="ac.goAdminRoom()" class="control-tools--authbutton btn btn-primary">Личный кабинет
+                <div ng-if="ac.checkLogin() === true" ng-click="ac.goAdminRoom()"
+                     class="control-tools--authbutton btn btn-primary">Личный кабинет
                 </div>
                 <div ng-if="ac.checkLogin() === true" class="control-tools--authbutton btn btn-danger"
                      ng-click="ac.logout()">Выйти
@@ -66,8 +67,11 @@
             </div>
         </div>
     </div>
-    <div ng-controller='MapController' id='map' enable-tagging></div>
-</div>
+    <div ng-controller='MapController' id='map' enable-tagging>
+<!--
+        <location-marker ng-if="locations" ng-repeat="location in locations"></location-marker>
+-->
+    </div>
 </div>
 </body>
 <script src='http://maps.api.2gis.ru/2.0/loader.js?pkg=full' data-id='dgLoader'></script>
