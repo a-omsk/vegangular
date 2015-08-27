@@ -5,8 +5,7 @@ $(document).ready(function() {
         var sidebarHeight = $('div.sidebar').height();
         var controlPanelHeight = $('div.control-panel').height();
         $('.location-container').height(sidebarHeight - controlPanelHeight);
-        $('#map').height(windowHeight);
-        $('#map').width(windowWidth);
+        $('#map').height(windowHeight).width(windowWidth);
     }
     $(window).resize(function() {
         changeMapHeight();

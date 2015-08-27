@@ -28,8 +28,20 @@
                 scope.valueRange.min = 50;
                 scope.valueRange.max = 1000;
                 scope.valueRange.step = 10;
+                scope.specifications = [
+                    {
+                        name: 'Вегетарианская',
+                        value: 'vegetarian'
+                    },
+                    {
+                        name: 'Веганская',
+                        value: 'vegan'
+                    }
+                ];
 
-                scope.locationData.specification = scope.locationData.specification.split(",");
+                if (scope.locationData.specification) {
+                    scope.locationData.specification = scope.locationData.specification.split(",");
+                }   
 
                 scope.addLocation = function () {
                     scope.locationData.specification = scope.locationData.specification.toString();

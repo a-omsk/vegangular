@@ -105,17 +105,38 @@ div.leaflet-popup-content-wrapper {
     position: absolute;
     margin-left: auto;
     margin-right: auto;
-    top: 5%;
+    top: 15px;
     left: 0;
     right: 0;
-    width: 70%;
-    height: 80%;
+    width: 80%;
 }
 
 .edit-form.location-form {
     width: 100%;
     position: inherit;
     padding: 0 10% 5% 10%;
+}
+
+div.form--add-location-popup{
+    width: 60%;
+    padding: 10px 40px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    border: 1px solid darkgray;
+}
+
+
+div.form--description-group {
+    margin-top: 15px;
+}
+
+div.form--avg-check {
+    margin-left: 20px;
+}
+
+div.form--special-group {
+    margin-top: 15px;
 }
 
 div.edit-form-submit {

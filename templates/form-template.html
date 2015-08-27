@@ -1,10 +1,10 @@
 <div class="location-form">
     <form ng-submit='addLocation()' class='add-location-form'>
         <div class="form-group">
-            <button class="btn btn-primary button--close-edit-form" ng-click="close()">close</button>
+            <button class="btn btn-default button--close-edit-form" ng-click="close()">Закрыть</button>
         </div>
         <div class="form-group">
-            <label for='form-name'>Тип заведения</label>
+            <label for='form-name'>Название заведения</label>
             <input id="form-name" class='form-control form-name' placeholder='введите название'
                    ng-model='locationData.name' type='text' required>
         </div>
@@ -29,12 +29,13 @@
                        ng-model='locationData.time' required
                        type='text'>
             </div>
-            <div class="form-group">
+            <div class="form-group form--avg-check">
                 <div class="form-inline">
                     <label class="form-label--price" for="form-price">Средний чек</label>
 
                     <div class="form-group">
-                        <slider class="slider-price" ng-model="locationData.price" min="valueRange.min" step="valueRange.step"
+                        <slider class="slider-price" ng-model="locationData.price" min="valueRange.min"
+                                step="valueRange.step"
                                 max="valueRange.max"></slider>
                         <div class="input-group">
                             <input id='form-price' class='form-control form-price' placeholder='средний чек'
@@ -47,31 +48,33 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="form-inline">
-                <label>Представлена еда:</label>
+            <div class="form-inline form--special-group">
+                <div class="form-group">
+                    <div class="form-inline">
+                        <label>Представлена еда:</label>
 
-                <div class="checkbox">
-                    <label>
-                        <input type='checkbox' checklist-model='locationData.specification' checklist-value="vegetarian">
-                        Вегетарианская</label>
+                        <div ng-repeat="spec in specifications" class="checkbox">
+                            <label>
+                                <input type='checkbox' checklist-model='locationData.specification'
+                                       checklist-value="spec.value">
+                                {{spec.name}}</label>
+                        </div>
+                    </div>
                 </div>
-                <div class="checkbox">
-                    <label>
-                        <input type='checkbox' checklist-model='locationData.specification' checklist-value="vegan">
-                        Веганская</label>
+                <div class="form-group form-rating-group">
+                    <div class="form-inline">
+                        <label> Оцените заведение: </label>
+
+                        <div class="form-group">
+                            <div class="form-rating"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="form-group form-rating-group">
-            <label> Оцените заведение: </label>
-
-            <div class="form-rating"></div>
-        </div>
-        <div class="form-group">
+        <div class="form-group form--description-group">
         <textarea class='form-control form-description' placeholder='что в меню?' ng-model='locationData.description'
-                  required cols='25'
-                  rows='10'></textarea>
+                  required cols='10'
+                  rows='5'></textarea>
         </div>
         <div class="col-sm-offset-2 edit-form-submit col-sm-10">
             <input class='btn-default btn location-form-submit' type='submit' value='Сохранить'>
