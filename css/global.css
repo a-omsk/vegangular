@@ -11,6 +11,28 @@ div.sidebar {
     z-index: 10;
 }
 
+div.sidebar--adaptive {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+div.content--adaptive {
+    margin-left: -300px;
+    -webkit-transition: all 0.5s, ease;
+    -moz-transition: all 0.5s, ease;
+    -o-transition: all 0.5s, ease;
+    transition: all 0.5s, ease;
+}
+
+button.button--toogle-sidebar {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    z-index: 100;
+}
+
 div.control-tools {
     position: absolute;
     right: 10px;
@@ -26,10 +48,12 @@ div.login-status {
 
 div.auth-modal {
     position: absolute;
-    left: 40%;
-    top: 10%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 20%;
     z-index: 999;
-    width: 400px;
+    width: 40%;
     padding: 20px;
     background: rgba(245, 245, 245, 0.9);
     -webkit-border-radius: 10px;
@@ -127,7 +151,7 @@ button.close-button {
     position: absolute;
     z-index: 10;
     right: 5%;
-    top:2%;
+    top: 2%;
 
 }
 
@@ -138,4 +162,21 @@ img.user-image {
 .user-table {
     height: 370px;
     overflow: scroll;
+}
+
+.glyphicon:hover, .glyphicon:focus {
+    color: #fc3200;
+}
+
+.button--close-edit-form {
+    float: right;
+    margin-bottom: 5px;
+}
+
+.form-label--time, .form-label--price {
+    margin-right: 20px;
+}
+
+.slider-price {
+    margin-bottom: 10px;
 }

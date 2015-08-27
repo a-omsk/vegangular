@@ -51,6 +51,8 @@
 
                         $rootScope.map = map;
 
+                        $rootScope.isAdaptive = false;
+
                         mapService.saveMapContainer(map);
 
                         //Add geolocation of user.

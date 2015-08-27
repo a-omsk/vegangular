@@ -46,6 +46,22 @@
                     console.log(response);
                 })
             }
+        };
+
+        this.updateLocation = function(city, id, data) {
+            if (city && id && data) {
+                return $http.put(API_HOST + 'locations/' + city + '/' + id, data).success(function (response) {
+                    return response;
+                })
+            }
+        };
+
+        this.deleteLocation = function (city, id) {
+            if (city && id) {
+                return $http.delete(API_HOST + 'locations/' + city + '/' + id).success(function (response) {
+                    return response;
+                })
+            }
         }
     }
 })();

@@ -31,7 +31,6 @@
                     $scope.locationData.specification = $scope.locationData.specification.toString();
 
                     locationService.postLocation($scope.locationData).then(function (data) {
-                        console.info(data);
                         $rootScope.$broadcast('locationAdded');
                     });
                     $rootScope.openForm = false;

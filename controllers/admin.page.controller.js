@@ -24,6 +24,14 @@
 
         };
 
+        $scope.deleteLocation = function (city, id) {
+            locationService.deleteLocation(city, id).then(function(){
+                $scope.locations = $scope.locations.filter(function(value){
+                    return value.id !== id;
+                });
+            });
+        };
+
         vm.currentCity = citiesListService.getCurrentCity();
         if (!vm.currentCity) {
             vm.currentCity = 'omsk';
@@ -38,6 +46,7 @@
         });
 
         $scope.$watch('manageCity', function(data){
+            console.log(data);
             if (data && data === 'all') {
                 locationService.getAllLocations().then(function(response){
                     $scope.locations = response.data;
@@ -55,6 +64,8 @@
         vm.close = function () {
             $location.path('/locations/' + vm.currentCity);
         }
+
+
     }
 
 })();

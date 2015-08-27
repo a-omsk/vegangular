@@ -4,5 +4,4 @@
 
     angular
         .module('mapApp.directives', []);
-
 })();

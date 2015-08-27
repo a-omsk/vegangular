@@ -16,14 +16,14 @@
                     return mapService.getMapContainer()
                 }, function (map) {
                     if (map) {
-                        map.on('dblclick', function (e) {
-                            $rootScope.latlng = e.latlng;
-                            var geo = [e.latlng.lat, e.latlng.lng];
-                            mapService.getObject(e.latlng).then(function (r) {
-                                console.log(r);
+                        map.on('dblclick', function (event) {
+                            $rootScope.latlng = event.latlng;
+                            var geo = [event.latlng.lat, event.latlng.lng];
+                            mapService.getObject(event.latlng).then(function (response) {
                                 $rootScope.address = null;
-                                if (r.data.result[0].attributes.street) {
-                                    $rootScope.address = r.data.result[0].attributes.street + " " + r.data.result[0].attributes.number;
+                                if (response.data.result[0].attributes.street) {
+                                    $rootScope.address = response.data.result[0].attributes.street + " "
+                                        + response.data.result[0].attributes.number;
                                 }
                             });
                             var popup = DG.popup({minWidth: 500})

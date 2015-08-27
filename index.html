@@ -5,8 +5,9 @@
     <title>Angular.js</title>
     <meta charset='utf-8'>
     <link rel='stylesheet' type='text/css' href='css/normalize.css'>
-    <link rel='stylesheet' type='text/css' href='css/global.css'>
     <link rel='stylesheet' type='text/css' href='css/bootstrap.min.css'>
+    <link rel='stylesheet' type='text/css' href='css/bootstrap-slider.min.css'>
+    <link rel='stylesheet' type='text/css' href='css/global.css'>
 
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
@@ -14,16 +15,16 @@
 <body ng-cloak>
 <div class='container-fluid'>
     <div ui-view="admin"></div>
-    <div class='content'>
+    <div class='content' adaptive-menu>
         <add-location-form ng-if="$root.openForm" class="location-form"></add-location-form>
-        <div class='sidebar'>
+        <div class='sidebar' ng-swipe-left="$root.swipeLeft()">
             <div class='control-panel'>
                 <input class='form-control' placeholder='поиск' type='text' ng-model='search'>
             </div>
             <div>
-                <div ng-controller='ShowCityController' ng-show='$rootScope.showCityList' class="citylist">
+                <div ng-controller='ShowCityController' ng-show='$root.showCityList' class="citylist">
                     <ul class='citylist--list'>
-                        <li ng-click='$rootScope.showCityList = ! $rootScope.showCityList' class='list-group-item'
+                        <li ng-click='$root.showCityList = ! $root.showCityList' class='list-group-item'
                             ng-repeat='city in cities | filter:search'>
                             <a ui-sref='location({ city: city.code })' class='list-title'>{{city.name}}</a>
                         </li>
@@ -34,7 +35,7 @@
         </div>
         <div class="control-tools">
             <div class="control-tools--citybutton btn btn-default"
-                 ng-click='$rootScope.showCityList = ! $rootScope.showCityList'>Сменить
+                 ng-click='$root.showCityList = ! $root.showCityList'>Сменить
                 город
             </div>
         </div>
@@ -68,9 +69,9 @@
         </div>
     </div>
     <div ng-controller='MapController' id='map' enable-tagging>
-<!--
-        <location-marker ng-if="locations" ng-repeat="location in locations"></location-marker>
--->
+        <!--
+                <location-marker ng-if="locations" ng-repeat="location in locations"></location-marker>
+        -->
     </div>
 </div>
 </body>

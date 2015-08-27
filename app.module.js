@@ -6,9 +6,12 @@
         .module('mapApp', [
             'mapApp.services',
             'mapApp.controllers',
-            'ngCookies',
+            'mapApp.directives',
             'ui.router',
+            'ngTouch',
             'ngStorage',
-            'checklist-model'
+            'checklist-model',
+            'ui.bootstrap-slider',
+            'adaptive.detection'
         ]);
 })();

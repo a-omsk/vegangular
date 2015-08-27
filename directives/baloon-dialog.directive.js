@@ -16,7 +16,6 @@
                 console.log($rootScope.openForm);
                 $scope.authorized = !!$localStorage.token;
                 $scope.openForm = function () {
-                    console.log("i'am worked'");
                     $rootScope.openForm = true;
                 };
             }
