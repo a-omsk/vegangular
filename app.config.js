@@ -7,15 +7,18 @@
         .config(configure)
         .run(init);
 
-    init.$inject = ['citiesListService', 'authService', 'mapService', '$location', '$localStorage', '$rootScope'];
+    init.$inject = ['$window','citiesListService', 'authService', 'mapService', '$location', '$localStorage', '$rootScope', '$detection'];
 
-    function init(citiesListService, authService, mapService, $location, $localStorage, $rootScope) {
-        console.log("your token", $localStorage.token);
+    function init($window, citiesListService, authService, mapService, $location, $localStorage, $rootScope, $detection) {
 
         if ($localStorage.token) {
             authService.checkLogin().then(function (data) {
-                console.log(data);
+                console.info($localStorage.token, data);
             });
+        }
+
+        if (($detection.isAndroid() || $detection.isiOS() || $detection.isWindowsPhone()) && $window.innerWidth < 640) {
+            $rootScope.isAdaptive = true;
         }
 
         var centroid = [];
@@ -24,7 +27,7 @@
         DG.then(function () {
             citiesListService.getCitiesList().then(function (callback) {
 
-                var cityObj = callback.data.result.filter(function(value){
+                var cityObj = callback.data.result.filter(function (value) {
                     return value.code === currentCity
                 });
 
@@ -40,25 +43,25 @@
 
                 citiesListService.saveCurrentCity(currentCity);
 
-                        var map = DG.map('map', {
-                            center: [centroid.lat, centroid.lng],
-                            zoom: 14,
-                            minZoom: 13,
-                            fullscreenControl: false,
-                            zoomControl: false,
-                            doubleClickZoom: false
-                        });
+                var map = DG.map('map', {
+                    center: [centroid.lat, centroid.lng],
+                    zoom: 14,
+                    minZoom: 13,
+                    fullscreenControl: false,
+                    zoomControl: false,
+                    doubleClickZoom: false
+                });
 
-                        $rootScope.map = map;
+                $rootScope.map = map;
 
-                        $rootScope.isAdaptive = false;
+                $rootScope.isAdaptive = false;
 
-                        mapService.saveMapContainer(map);
+                mapService.saveMapContainer(map);
 
-                        //Add geolocation of user.
-                        DG.control.location({
-                            position: 'bottomright'
-                        }).addTo(map);
+                //Add geolocation of user.
+                DG.control.location({
+                    position: 'bottomright'
+                }).addTo(map);
             });
         });
     }

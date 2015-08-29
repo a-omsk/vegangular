@@ -1,43 +1,45 @@
 <div class='location-details-container'>
-	<a class='return-button btn' ui-sref='location({ city: location.city})'>Назад</a>
-	<div class='location-details-name'>
-		<h1>{{location.name}}</h1>
-		<h2>{{location.address}}</h2>
-</h2>
-	</div>
-	<div ng-hide='location.type == null' class='location-details-type'>
-		<h4 class='location-type'>Тип заведения:</h4>
-		<p>{{location.type}}</p>
-	</div>
-	<div ng-hide='location.time == null' class='location-details-time'>
-		<h4 class='location-time'>Время работы:</h4>
-		<p>{{location.time}}</p>
-	</div>
-	<div ng-hide='location.specification == null' class='location-specification-desc'>
-		<h4 class='location-specification'>Представлена кухня:</h4>
-		<p>{{location.specification}}</p>
-	</div>
-	<div ng-hide='location.description == null' class='location-details-desc'>
-		<h4 class='location-name'>В меню:</h4>
-		<p>{{location.description}}</p>
-	</div>
+
+    <button class='return-button btn btn-default btn-sm' ui-sref='location({ city: location.city})'><span class="glyphicon glyphicon-chevron-left"></span></button>
+
+    <div class='location-details-name'>
+        <h1>{{location.name}}</h1>
+
+        <h2>{{location.address}}</h2>
+        </h2>
+    </div>
+    <div ng-hide='location.type == null' class='location-details-type'>
+        <h4 class='location-type'>Тип заведения:</h4>
+
+        <p>{{location.type}}</p>
+    </div>
+    <div ng-hide='location.time == null' class='location-details-time'>
+        <h4 class='location-time'>Время работы:</h4>
+
+        <p>{{location.time}}</p>
+    </div>
+    <div ng-hide='location.specification == null' class='location-specification-desc'>
+        <h4 class='location-specification'>Представлена кухня:</h4>
+
+        <p>{{location.specification}}</p>
+    </div>
+    <div ng-hide='location.description == null' class='location-details-desc'>
+        <h4 class='location-name'>В меню:</h4>
+
+        <p>{{location.description}}</p>
+    </div>
 </div>
 <div class='location-comments'>
-	<h4 class='location-comments-header'>Отзывы</h4>
-	<div ng-click='showCommentForm = ! showCommentForm' class='leave-comment btn-default btn'>Оставить комментарий</div>
-	<div ng-controller='CommentFormController' ng-show='showCommentForm' class='location-comment-form ng-hide'>
-		<form ng-submit='store(comment)' novalidate>
-			<input class='comment-author' type="text" ng-model='comment.author'>
-			<raty class='star-rating' number='5' ng-model='comment.rating'></raty>
-			<textarea class='comment-body-area' ng-model='comment.body'></textarea>
-			<input ng-click='showCommentForm = ! showCommentForm' class='btn-default btn' type='submit' value='Отправить'>
-		</form>
-	</div>
+    <h4 class='location-comments-header'>Отзывы</h4>
+
+    <div ng-click='showCommentForm = ! showCommentForm' class='leave-comment btn-default btn'>Оставить комментарий</div>
+    <div ng-show='showCommentForm' class='location-comment-form' leave-comment>
+    </div>
 </div>
 <ul class='comments-list list-group'>
-	<li class='list-group-item' ng-repeat="comment in comments | orderBy:'-id'">
-		<div class='list-date'>{{comment.created_at}}</div>
-		<div class='list-author'>{{comment.author}}</div>
-		<div class='list-body'>{{comment.body}}</div>
-	</li>
+    <li class='list-group-item' ng-repeat="comment in comments | orderBy:'-id'">
+        <div class='list-date'>{{comment.created_at | date: 'mediumDate'}}</div>
+        <div class='list-author'>{{comment.author}}</div>
+        <div class='list-body'>{{comment.body}}</div>
+    </li>
 </ul>

@@ -1,0 +1,14 @@
+<div>
+    <form>
+        <div class="form-group">
+            <input class='comment-author' type="text" ng-model='comment.author' required>
+        </div>
+        <div class="form-group">
+            <div class='comment-rating'></div>
+        </div>
+        <div class="form-group">
+            <textarea class='comment-body-area' ng-model='comment.body' required></textarea>
+        </div>
+        <button ng-click='store()' class='btn-default btn'>Отправить</button>
+    </form>
+</div>

@@ -12,7 +12,7 @@
             restrict: 'AE',
             link: function (scope, elem) {
                 if (scope.location) {
-                    $(elem).raty({readOnly: true, number: 5, score: scope.location.rating});
+                    $(elem).raty({readOnly: true, half: true, number: 5, score: scope.location.rating});
                 }
             }
         }

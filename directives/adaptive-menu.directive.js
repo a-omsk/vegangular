@@ -12,8 +12,7 @@
             scope: true,
             restrict: 'A',
             link: function (scope, elem) {
-                if ($detection.isAndroid() || $detection.isiOS() || $detection.isWindowsPhone()) {
-                    $rootScope.isAdaptive = true;
+                if ($rootScope.isAdaptive) {
 
                     var hideMenu = function () {
                         elem.addClass('content--adaptive');

@@ -16,7 +16,7 @@
 <div class='container-fluid'>
     <div ui-view="admin"></div>
     <div class='content' adaptive-menu>
-        <add-location-form ng-if="$root.openForm" class="form--add-location-popup"></add-location-form>
+        <add-location-form ng-if="$root.openForm" class="form--add-location-popup" adaptive-style></add-location-form>
         <div class='sidebar' ng-swipe-left="$root.swipeLeft()">
             <div class='control-panel'>
                 <input class='form-control' placeholder='поиск' type='text' ng-model='search'>
@@ -34,24 +34,28 @@
             </div>
         </div>
         <div class="control-tools">
-            <div class="control-tools--citybutton btn btn-default"
-                 ng-click='$root.showCityList = ! $root.showCityList'>Сменить
-                город
-            </div>
+
         </div>
         <div ng-controller="AuthController as ac">
             <div class="control-tools login-status">
-                <div ng-if="ac.checkLogin() === true" ng-click="ac.goAdminRoom()"
-                     class="control-tools--authbutton btn btn-primary">Личный кабинет
-                </div>
-                <div ng-if="ac.checkLogin() === true" class="control-tools--authbutton btn btn-danger"
-                     ng-click="ac.logout()">Выйти
-                </div>
-                <div ng-if="ac.checkLogin() === false" class="control-tools--authbutton btn btn-default"
-                     ng-click='ac.showModal = ! ac.showModal'>Войти
+                <div class="btn-group" role="group">
+                    <button ng-if="ac.checkLogin() === true" ng-click="ac.goAdminRoom()"
+                            class="control-tools--authbutton btn btn-primary"> <span class="glyphicon glyphicon-home"></span> Личный кабинет
+                    </button>
+<!--                    <button ng-if="ac.checkLogin() === true" class="control-tools&#45;&#45;authbutton btn btn-danger"
+                            ng-click="ac.logout()">Выйти
+                    </button>-->
+                    <button ng-if="ac.checkLogin() === false" class="control-tools--authbutton btn btn-default"
+                            ng-click='ac.showModal = ! ac.showModal'><span class="glyphicon glyphicon-user"></span>
+                        Войти
+                    </button>
+                    <button class="control-tools--citybutton btn btn-default"
+                            ng-click='$root.showCityList = ! $root.showCityList'>
+                        <span class="glyphicon glyphicon-map-marker"></span> Сменить город
+                    </button>
                 </div>
             </div>
-            <div class="auth-modal modal-dialog card card-container" ng-show="ac.showModal">
+            <div class="auth-modal modal-dialog card card-container" adaptive-style ng-show="ac.showModal">
                 <div class='modal-body'>
                     <form name="loginForm " ng-submit="ac.login()">
                         <div class="form-group">

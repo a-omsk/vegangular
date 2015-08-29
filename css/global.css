@@ -1,5 +1,15 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+html * {
+    font-family: 'Roboto', sans-serif;
+}
+
 div.container-fluid {
     padding: 0;
+}
+
+.adaptive-width {
+    width: 100% !important;
 }
 
 div.sidebar {
@@ -42,7 +52,7 @@ div.control-tools {
 
 div.login-status {
     position: absolute;
-    right: 138px;
+    right: 10px;
     top: 10px;
 }
 
@@ -117,7 +127,7 @@ div.leaflet-popup-content-wrapper {
     padding: 0 10% 5% 10%;
 }
 
-div.form--add-location-popup{
+div.form--add-location-popup {
     width: 60%;
     padding: 10px 40px;
     -webkit-border-radius: 8px;
@@ -125,7 +135,6 @@ div.form--add-location-popup{
     border-radius: 8px;
     border: 1px solid darkgray;
 }
-
 
 div.form--description-group {
     margin-top: 15px;

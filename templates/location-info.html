@@ -2,9 +2,14 @@
     <div ng-if="locations.length === 0" class="message-block">
         <h5 class="message-block--text">Извините, заведения в данном городе еще не добавлены</h5>
     </div>
-    <li class='list-group-item' ng-repeat='location in locations | filter:search'>
-        <a class='list-title' ui-sref='location-details({ city: location.city, id: location.id })'>{{::location.name}}</a>
-        <div class='list-type'>{{::location.type}}</div>
+    <li class='list-group-item' ui-sref='location-details({ city: location.city, id: location.id })'
+        ng-repeat='location in locations | filter:search'>
+        <h4 class='list-title'>{{::location.name}}</h4>
+
+        <div ng-if="location.type === 'cafe'" class='list-type'>Кафе</div>
+        <div ng-if="location.type === 'restaurant'" class='list-type'>Ресторан</div>
+        <div ng-if="location.type === 'eatery'" class='list-type'>Столовая</div>
+        <div ng-if="location.type === 'coffee'" class='list-type'>Кофейня</div>
         <div class='list-time'>Время работы: {{::location.time}}</div>
         <raty id='star-rating' score='5'></raty>
     </li>
