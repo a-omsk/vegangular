@@ -24,9 +24,11 @@
             <div>
                 <div ng-controller='ShowCityController' ng-show='$root.showCityList' class="citylist">
                     <ul class='citylist--list'>
-                        <li ng-click='$root.showCityList = ! $root.showCityList' class='list-group-item'
+                        <li ng-click='$root.showCityList = ! $root.showCityList' ui-sref='location({ city: city.code })'
+                            class='list-group-item'
                             ng-repeat='city in cities | filter:search'>
-                            <a ui-sref='location({ city: city.code })' class='list-title'>{{city.name}}</a>
+                            <span class="glyphicon glyphicon-map-marker"></span>
+                            <span class='list-title'>{{city.name}}</span>
                         </li>
                     </ul>
                 </div>
@@ -38,13 +40,14 @@
         </div>
         <div ng-controller="AuthController as ac">
             <div class="control-tools login-status">
-                <div class="btn-group" role="group">
+                <div class="btn-group buttons--control" role="group">
                     <button ng-if="ac.checkLogin() === true" ng-click="ac.goAdminRoom()"
-                            class="control-tools--authbutton btn btn-primary"> <span class="glyphicon glyphicon-home"></span> Личный кабинет
+                            class="control-tools--authbutton btn btn-primary"><span
+                            class="glyphicon glyphicon-home"></span> Личный кабинет
                     </button>
-<!--                    <button ng-if="ac.checkLogin() === true" class="control-tools&#45;&#45;authbutton btn btn-danger"
-                            ng-click="ac.logout()">Выйти
-                    </button>-->
+                    <!--                    <button ng-if="ac.checkLogin() === true" class="control-tools&#45;&#45;authbutton btn btn-danger"
+                                                ng-click="ac.logout()">Выйти
+                                        </button>-->
                     <button ng-if="ac.checkLogin() === false" class="control-tools--authbutton btn btn-default"
                             ng-click='ac.showModal = ! ac.showModal'><span class="glyphicon glyphicon-user"></span>
                         Войти

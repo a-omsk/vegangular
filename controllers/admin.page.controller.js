@@ -6,17 +6,28 @@
         .module('mapApp.controllers')
         .controller('adminPageController', adminPageController);
 
-    adminPageController.$inject = ['$scope', '$location', 'citiesListService', 'locationService', '$localStorage'];
+    adminPageController.$inject = ['$rootScope', '$scope', '$location', 'citiesListService', 'locationService', '$localStorage'];
 
-    function adminPageController($scope, $location, citiesListService, locationService, $localStorage) {
+    function adminPageController($rootScope, $scope, $location, citiesListService, locationService, $localStorage) {
 
         var vm = this;
+
+        vm.username = $localStorage.user.name;
+
+        vm.email = $localStorage.user.email;
 
         $scope.manageCity = null;
 
         $scope.showEditForm = false;
 
+        $scope.cities = $rootScope.cities;
+
         vm.editID = null;
+
+        vm.currentCity = citiesListService.getCurrentCity();
+        if (!vm.currentCity) {
+            vm.currentCity = 'omsk';
+        }
 
         $scope.editLocation = function (id) {
             vm.editID = id;
@@ -25,41 +36,29 @@
         };
 
         $scope.deleteLocation = function (city, id) {
-            locationService.deleteLocation(city, id).then(function(){
-                $scope.locations = $scope.locations.filter(function(value){
+            locationService.deleteLocation(city, id).then(function () {
+                $scope.locations = $scope.locations.filter(function (value) {
                     return value.id !== id;
                 });
             });
         };
 
-        vm.currentCity = citiesListService.getCurrentCity();
-        if (!vm.currentCity) {
-            vm.currentCity = 'omsk';
-        }
-
-        locationService.getAllLocations().then(function(response){
+        locationService.getAllLocations().then(function (response) {
             $scope.locations = response.data;
         });
 
-        citiesListService.getCitiesList().then(function(response){
-            $scope.cities = response.data.result
-        });
-
-        $scope.$watch('manageCity', function(data){
+        /*$scope.$watch('manageCity', function (data) {
             console.log(data);
             if (data && data === 'all') {
-                locationService.getAllLocations().then(function(response){
+                locationService.getAllLocations().then(function (response) {
                     $scope.locations = response.data;
                 });
             } else if (data) {
-                locationService.getLocations(data).then(function(response){
+                locationService.getLocations(data).then(function (response) {
                     $scope.locations = response.data;
                 });
             }
-        });
-
-        vm.username = $localStorage.user.name;
-        vm.email = $localStorage.user.email;
+        });*/
 
         vm.close = function () {
             $location.path('/locations/' + vm.currentCity);

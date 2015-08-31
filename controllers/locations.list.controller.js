@@ -74,9 +74,7 @@
                     });
                 });
 
-                citiesListService.getCitiesList().then(function (callback) {
-
-                    var newCity = callback.data.result.filter(function (value) {
+                    var newCity = $rootScope.cities.filter(function (value) {
                         return value.code === $stateParams.city;
                     });
 
@@ -86,7 +84,6 @@
                     }
                     citiesListService.saveCurrentCity(newCity[0].code);
 
-                });
             }
 
         });

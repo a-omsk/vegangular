@@ -7,9 +7,16 @@
         .config(configure)
         .run(init);
 
-    init.$inject = ['$window','citiesListService', 'authService', 'mapService', '$location', '$localStorage', '$rootScope', '$detection'];
+    init.$inject = ['$window', 'citiesListService', 'authService', 'mapService', '$location', '$localStorage', '$rootScope', '$detection'];
 
     function init($window, citiesListService, authService, mapService, $location, $localStorage, $rootScope, $detection) {
+
+        var centroid = [],
+            minZoom,
+            zoom,
+            currentCity = $location.path().substr(11).replace(/\/([^/]*)$/, '');
+
+        $rootScope.isAdaptive = false;
 
         if ($localStorage.token) {
             authService.checkLogin().then(function (data) {
@@ -19,13 +26,19 @@
 
         if (($detection.isAndroid() || $detection.isiOS() || $detection.isWindowsPhone()) && $window.innerWidth < 640) {
             $rootScope.isAdaptive = true;
+            minZoom = 14;
+            zoom = 15
         }
 
-        var centroid = [];
-        var currentCity = $location.path().substr(11).replace(/\/([^/]*)$/, '');
+        else {
+            minZoom = 13;
+            zoom = 14;
+        }
 
         DG.then(function () {
             citiesListService.getCitiesList().then(function (callback) {
+
+                $rootScope.cities = callback.data.result;
 
                 var cityObj = callback.data.result.filter(function (value) {
                     return value.code === currentCity
@@ -43,18 +56,18 @@
 
                 citiesListService.saveCurrentCity(currentCity);
 
+                $rootScope.currentCity = currentCity;
+
                 var map = DG.map('map', {
                     center: [centroid.lat, centroid.lng],
-                    zoom: 14,
-                    minZoom: 13,
+                    zoom: zoom,
+                    minZoom: minZoom,
                     fullscreenControl: false,
                     zoomControl: false,
                     doubleClickZoom: false
                 });
 
                 $rootScope.map = map;
-
-                $rootScope.isAdaptive = false;
 
                 mapService.saveMapContainer(map);
 

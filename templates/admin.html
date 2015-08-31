@@ -73,19 +73,19 @@
                             <tbody>
                             <tr ng-repeat="location in locations">
                                 <td>
-                                    {{location.id}}
+                                    {{::location.id}}
                                 </td>
                                 <td>
-                                    {{location.city}}
+                                    {{::location.city | city}}
                                 </td>
                                 <td>
                                     {{location.name}}
                                 </td>
                                 <td>
-                                    {{location.type}}
+                                    {{location.type | locationDetails}}
                                 </td>
                                 <td>
-                                    {{location.specification}}
+                                    {{location.specification | locationDetails}}
                                 </td>
                                 <td>
                                     <span ng-click="editLocation(location.id)" class="glyphicon glyphicon-edit"></span>

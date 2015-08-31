@@ -7,6 +7,7 @@
             'mapApp.services',
             'mapApp.controllers',
             'mapApp.directives',
+            'mapApp.filters',
             'ui.router',
             'ngTouch',
             'ngStorage',

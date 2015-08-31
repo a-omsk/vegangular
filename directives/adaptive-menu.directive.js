@@ -29,10 +29,12 @@
                     scope.toogle = function () {
                         elem.removeClass('content--adaptive');
                         el.remove();
+                        angular.element('.buttons--control').hide();
                     };
 
                     $rootScope.swipeLeft = function () {
                         hideMenu();
+                        angular.element('.buttons--control').show();
                     };
 
                     scope.$watch('showCityList', function () {

@@ -29,7 +29,6 @@
                                 var postComment = angular.copy(scope.comment);
                                 postComment.id_location = scope.location.id;
                                 commentsService.postNewComment(postComment).then(function (data) {
-                                    console.error(data);
                                     postComment.created_at = Date.now();
                                     scope.comments.push(postComment);
                                 });

@@ -27,6 +27,7 @@ var gulp = require('gulp'),
         'services/*.js',
         'controllers/*.js',
         'directives/*.js',
+        'filters/*.js',
         'mapsize.js'
     ],
 

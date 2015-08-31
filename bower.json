@@ -28,6 +28,7 @@
     "ui-router": "~0.2.15"
   },
   "resolutions": {
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "angular": "1.4.5"
   }
 }
