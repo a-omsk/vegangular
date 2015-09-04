@@ -17,7 +17,11 @@
                 scope.$watch('location', function (location) {
                     if (location) {
                         scope.comment = {};
-                        scope.comment.author = $localStorage.user.name;
+                        if($localStorage.user) {
+                            scope.comment.author = $localStorage.user.name;
+                        } else {
+                            scope.comment.author = 'Анонимный'
+                        }
                         $('.comment-rating').raty({
                             number: 5, click: function (score) {
                                 scope.comment.rating = score;

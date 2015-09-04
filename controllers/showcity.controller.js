@@ -12,7 +12,6 @@
         $rootScope.$watch('currentCity', function(city) {
             $scope.currentCity = city;
         });
-
         citiesListService.getCitiesList().then(function (callback) {
             $scope.cities = callback.data.result;
         });

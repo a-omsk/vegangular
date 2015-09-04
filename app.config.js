@@ -68,6 +68,7 @@
                 });
 
                 $rootScope.map = map;
+                $rootScope.markers = {};
 
                 mapService.saveMapContainer(map);
 

@@ -1,0 +1,212 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+html * {
+    font-family: 'Roboto', sans-serif;
+}
+
+div.container-fluid {
+    padding: 0;
+}
+
+.adaptive-width {
+    width: 100% !important;
+}
+
+div.sidebar {
+    position: fixed;
+    display: inline-block;
+    width: 300px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 10;
+}
+
+div.sidebar--adaptive {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+div.content--adaptive {
+    margin-left: -300px;
+    -webkit-transition: all 0.5s, ease;
+    -moz-transition: all 0.5s, ease;
+    -o-transition: all 0.5s, ease;
+    transition: all 0.5s, ease;
+}
+
+button.button--toogle-sidebar {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    z-index: 100;
+}
+
+div.control-tools {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 10;
+}
+
+div.login-status {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+div.auth-modal {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 20%;
+    z-index: 999;
+    width: 40%;
+    padding: 20px;
+    background: rgba(245, 245, 245, 0.9);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+button.login-form-submit {
+    width: 50%;
+    margin: 0 25%;
+}
+
+ul.citylist--list {
+    padding-left: 0;
+    overflow: auto;
+    height: 610px;
+}
+
+div.location-container {
+    overflow: auto;
+    height: 610px;
+}
+
+li.list-group-item {
+    background: none;
+}
+
+div.location-details-container {
+    padding-left: 20px;
+}
+
+div.location-comments {
+    padding: 10px 10px 10px 20px;
+}
+
+textarea.comment-body-area {
+    display: block;
+    width: 280px;
+
+}
+
+div.leaflet-popup-content-wrapper {
+    max-height: 200px !important;
+}
+
+.location-form {
+    background: whitesmoke;
+    z-index: 1000;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 15px;
+    left: 0;
+    right: 0;
+    width: 80%;
+}
+
+.edit-form.location-form {
+    width: 100%;
+    position: inherit;
+    padding: 0 10% 5% 10%;
+}
+
+div.form--add-location-popup {
+    width: 60%;
+    padding: 10px 40px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    border: 1px solid darkgray;
+}
+
+div.form--description-group {
+    margin-top: 15px;
+}
+
+div.form--avg-check {
+    margin-left: 20px;
+}
+
+div.form--special-group {
+    margin-top: 15px;
+}
+
+div.edit-form-submit {
+    margin-left: 40%;
+    margin-right: 40%;
+    width: 20%;
+}
+
+.admin-page {
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background: rgba(245, 245, 245, 0.6);
+}
+
+div.admin-content {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: whitesmoke;
+    border: 1px solid rgb(225, 225, 225);
+    border-radius: 5px;
+    width: 95%;
+    height: 95%;
+    overflow: auto;
+}
+
+button.close-button {
+    position: absolute;
+    z-index: 10;
+    right: 5%;
+    top: 2%;
+
+}
+
+img.user-image {
+    margin: auto;
+}
+
+.user-table {
+    height: 370px;
+    overflow: scroll;
+}
+
+.glyphicon:hover, .glyphicon:focus {
+    color: #fc3200;
+}
+
+.button--close-edit-form {
+    float: right;
+    margin-bottom: 5px;
+}
+
+.form-label--time, .form-label--price {
+    margin-right: 20px;
+}
+
+.slider-price {
+    margin-bottom: 10px;
+}

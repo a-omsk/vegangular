@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     webserver = require('gulp-webserver'),
     uglify = require('gulp-uglify'),
+    sass = require('gulp-ruby-sass'),
 
     src = {
         bower: 'bower_components/'
@@ -57,14 +58,28 @@ gulp.task('styles', function () {
         .pipe(gulp.dest('css'))
 });
 
+gulp.task('sass', function() {
+  return sass('scss', { style: 'expanded' })
+    .pipe(gulp.dest('css'));
+});
+
+gulp.task('sass:watch', function () {
+  gulp.watch('scss/*.scss', ['sass']);
+});
+
 gulp.task('app', function () {
     gulp.src(app)
         .pipe(concat('app.js'))
         .pipe(gulp.dest('js'))
 });
 
+gulp.task('app:watch', function () {
+  gulp.watch(app, ['app']);
+});
 
 gulp.task('default', function () {
-    gulp.run('vendor', 'styles', 'app', 'webserver');
-    gulp.watch(app, ['app']);
+    gulp.run('vendor', 'styles', 'sass', 'sass:watch', 'app', 'app:watch', 'webserver');
+    
 });
+
+
