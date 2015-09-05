@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('mapApp.controllers')
+        .module('mapApp.directives')
         .directive('leaveComment', leaveComment);
 
     leaveComment.$inject = ['commentsService', '$localStorage'];

@@ -13,7 +13,6 @@
             vm = this;
 
         vm.cluster = null;
-        vm.markerArray = [];
 
         this.saveMapContainer = function (data) {
             map = data;
@@ -33,23 +32,35 @@
         this.pushMarker = function (value) {
 
             var veganIcon = DG.icon({
-                iconUrl: 'resources/icons/marker1.svg',
-                iconSize: [56, 56]
-            });
+                    iconUrl: 'resources/icons/marker1.svg',
+                    iconSize: [56, 56]
+                }),
+                id,
+                geo,
+                marker;
 
-            var geo = value.coordinates.replace(/[\[\]]/g, '').split(','),
+            if (value.geo) {
+                geo = value.geo;
+            } else {
+                geo = value.coordinates.replace(/[\[\]]/g, '').split(',');
+            }
+
+            if (value.id) {
                 id = value.id;
-            var marker = DG.marker(geo, {
+            } else {
+                id = '';
+            }
+
+            marker = DG.marker(geo, {
                 icon: veganIcon
             });
+
             marker.on('click', function () {
                 $rootScope.$apply(function () {
                     $location.path('/locations/' + value.city + '/' + id);
                 });
             });
             marker.cityId = id;
-
-            vm.markerArray.push(marker);
 
             return marker;
         };

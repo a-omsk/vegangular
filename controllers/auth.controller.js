@@ -22,7 +22,7 @@
         vm.showModal = false;
 
         vm.goAdminRoom = function () {
-            $location.path('/admin');
+            $location.path('/admin/locations');
         };
 
         vm.checkLogin = function () {

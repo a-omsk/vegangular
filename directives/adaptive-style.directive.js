@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('mapApp.controllers')
+        .module('mapApp.directives')
         .directive('adaptiveStyle', adaptiveStyle);
 
     adaptiveStyle.$inject = ['$rootScope'];
@@ -12,7 +12,7 @@
         return {
             scope: '@',
             restrict: 'A',
-            link: function (scope, elem, attrs) {
+            link: function (scope, elem) {
                 if ($rootScope.isAdaptive) {
                     elem.addClass('adaptive-width');
                 }

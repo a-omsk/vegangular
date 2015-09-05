@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('mapApp.controllers')
+        .module('mapApp.directives')
         .directive('baloonDialog', baloonDialog);
 
     baloonDialog.$inject = ['$rootScope', '$localStorage'];
@@ -13,7 +13,6 @@
             restrict: 'AE',
             templateUrl: 'templates/baloon-dialog.html',
             controller: function ($scope) {
-                console.log($rootScope.openForm);
                 $scope.authorized = !!$localStorage.token;
                 $scope.openForm = function () {
                     $rootScope.openForm = true;

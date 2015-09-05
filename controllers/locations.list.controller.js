@@ -1,7 +1,3 @@
-/**
- * TODO: Completely rewrite this controller
- */
-
 ;
 (function () {
     'use strict';
@@ -34,16 +30,22 @@
                 locationService.getLocations($stateParams.city).then(function (callback) {
                     $scope.locations = callback.data;
 
-                    mapService.markerArray = [];
+                    var markerArray = [];
 
                     if (mapService.cluster) {
                         mapService.cluster.clearLayers();
                     }
 
-                    angular.forEach(callback.data, mapService.pushMarker);
-                    mapService.cluster = DG.featureGroup(mapService.markerArray);
+                    angular.forEach(callback.data, function(value){
+
+                        markerArray.push(mapService.pushMarker(value));
+
+                    });
+
+                    mapService.cluster = DG.featureGroup(markerArray);
 
                     $rootScope.$watch('map', function (map) {
+
                         mapService.cluster.addTo(map);
 
                     });

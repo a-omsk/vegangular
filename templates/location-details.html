@@ -6,12 +6,11 @@
         <h1>{{::location.name}}</h1>
 
         <h2>{{::location.address}}</h2>
-        </h2>
     </div>
     <div class='location-details-type'>
         <h4 class='location-type'>Тип заведения:</h4>
 
-        <p> {{::location.type | locationDetails}}</p>
+        <p> {{location.type | locationDetails}}</p>
     </div>
     <div ng-hide='location.time == null' class='location-details-time'>
         <h4 class='location-time'>Время работы:</h4>
@@ -21,7 +20,7 @@
     <div class='location-specification-desc'>
         <h4 class='location-specification'>Представлена кухня:</h4>
 
-        <p>{{::location.specification | locationDetails}}</p>
+        <p>{{location.specification | locationDetails}}</p>
     </div>
     <div class='location-details-desc'>
         <h4 class='location-name'>В меню:</h4>

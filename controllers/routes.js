@@ -9,6 +9,7 @@
 
     function route($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/locations/omsk');
+        $urlRouterProvider.when('/admin', '/admin/locations');
         $stateProvider
             .state('location', {
                 url: '/locations/{city}',
@@ -36,6 +37,51 @@
                                 return authService.checkLogin()
                             }
                         }
+                    }
+                }
+            })
+            .state('admin.locations', {
+                url: '/locations',
+                templateUrl: 'templates/user/locations.html',
+                controller: 'adminPageController',
+                controllerAs: 'vm',
+                resolve: {
+                    auth: function (authService) {
+                        return authService.checkLogin()
+                    }
+                }
+
+            })
+            .state('admin.comments', {
+                url: '/comments',
+                templateUrl: 'templates/user/comments.html',
+                controller: 'adminPageCommentsController',
+                controllerAs: 'vm',
+                resolve: {
+                    auth: function (authService) {
+                        return authService.checkLogin()
+                    }
+                }
+            })
+            .state('admin.users', {
+                url: '/users',
+                templateUrl: 'templates/user/users.html',
+                controller: 'adminPageUsersController',
+                controllerAs: 'vm',
+                resolve: {
+                    auth: function (authService) {
+                        return authService.checkLogin()
+                    }
+                }
+            })
+            .state('admin.settings', {
+                url: '/settings',
+                templateUrl: 'templates/user/settings.html',
+                controller: 'adminPageSettingsController',
+                controllerAs: 'vm',
+                resolve: {
+                    auth: function (authService) {
+                        return authService.checkLogin()
                     }
                 }
             })

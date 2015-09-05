@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('mapApp.controllers')
+        .module('mapApp.directives')
         .directive('addLocationForm', addLocationForm);
 
     addLocationForm.$inject = ['$rootScope', 'locationService', 'citiesListService'];
@@ -48,7 +48,7 @@
                     console.log($scope.locationData);
                     $scope.locationData.specification = $scope.locationData.specification.toString();
 
-                    locationService.postLocation($scope.locationData).then(function (data) {
+                    locationService.postLocation($scope.locationData).then(function () {
                         $rootScope.$broadcast('locationAdded');
                     });
                     $rootScope.openForm = false;

@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('mapApp.controllers')
+        .module('mapApp.directives')
         .directive('editLocationForm', editLocationForm);
 
     editLocationForm.$inject = ['locationService'];
