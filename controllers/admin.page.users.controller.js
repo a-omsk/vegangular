@@ -6,9 +6,12 @@
         .module('mapApp.controllers')
         .controller('adminPageUsersController', adminPageUsersController);
 
-    adminPageUsersController.$inject = ['$scope'];
+    adminPageUsersController.$inject = ['$scope', 'usersService'];
 
-    function adminPageUsersController($scope) {
-
+    function adminPageUsersController($scope, usersService) {
+        usersService.getUsers().then(function(users){
+            $scope.users = users.data;
+            console.info(users.data);
+        })
     }
 })();

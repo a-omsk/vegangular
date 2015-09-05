@@ -1,1 +1,59 @@
-<div>Users</div>
+<div class="page-header">
+    <h1>
+        Пользователи
+        <small>Interface Builder for Bootstrap</small>
+    </h1>
+</div>
+<div ng-if="!showEditForm" class="form-group">
+    <label for="user-search">Поиск пользователя:</label>
+    <input ng-model="search" class="form-control" id="user-search" type="text">
+</div>
+<div class="user-table table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Пользователь
+            </th>
+            <th>
+                Полномочия
+            </th>
+            <th>
+                email
+            </th>
+            <th>
+                Зарегистрирован с
+            </th>
+            <th>
+
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users | filter:search">
+            <td>
+                {{::user.id}}
+            </td>
+            <td>
+                {{::user.name}}
+            </td>
+            <td>
+                {{::user.role}}
+            </td>
+            <td>
+                {{::user.email}}
+            </td>
+            <td>
+                {{::user.created_at}}
+            </td>
+            <td>
+                <span class="glyphicon glyphicon-edit"></span>
+                <span class="glyphicon glyphicon-remove"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
