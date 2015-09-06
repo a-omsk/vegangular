@@ -11,7 +11,6 @@
     function adminPageUsersController($scope, usersService) {
         usersService.getUsers().then(function(users){
             $scope.users = users.data;
-            console.info(users.data);
         })
     }
 })();

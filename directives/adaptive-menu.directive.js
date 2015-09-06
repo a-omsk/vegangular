@@ -6,8 +6,8 @@
         .module('mapApp.directives')
         .directive('adaptiveMenu', adaptiveMenu);
 
-    adaptiveMenu.$inject = ['$detection', '$compile', '$rootScope'];
-    function adaptiveMenu($detection, $compile, $rootScope) {
+    adaptiveMenu.$inject = ['$compile', '$rootScope'];
+    function adaptiveMenu($compile, $rootScope) {
         return {
             scope: true,
             restrict: 'A',

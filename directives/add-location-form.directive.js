@@ -19,8 +19,6 @@
                         scope.locationData.rating = score;
                     }
                 });
-
-
             },
             controller: function ($scope) {
                 var city = citiesListService.getCurrentCity();

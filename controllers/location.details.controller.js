@@ -6,11 +6,17 @@
         .module('mapApp.controllers')
         .controller('locationDetailsController', locationDetailsController);
 
-    locationDetailsController.$inject = ['$rootScope', '$scope', '$stateParams', 'mapService', 'locationService', 'commentsService'];
+    locationDetailsController.$inject = ['$q', '$rootScope', '$scope', '$stateParams', 'mapService', 'locationService', 'commentsService'];
 
-    function locationDetailsController($rootScope, $scope, $stateParams, mapService, locationService, commentsService) {
-        locationService.getLocations($stateParams.city, $stateParams.id).then(function (callback) {
-            $scope.location = callback.data[0];
+    function locationDetailsController($q, $rootScope, $scope, $stateParams, mapService, locationService, commentsService) {
+
+        var getLocation = locationService.getLocations($stateParams.city, $stateParams.id),
+            getComments = commentsService.getComments($stateParams.city, $stateParams.id);
+
+        $q.all([getLocation, getComments]).then(function (response) {
+            $scope.location = response[0].data[0];
+            $scope.comments = response[1].data;
+
             if (mapService.cluster) {
                 var prop;
                 for (prop in mapService.cluster._layers) {
@@ -21,19 +27,14 @@
             } else {
                 $rootScope.$watch('map', function (map) {
                     if (map) {
-                        var marker = mapService.pushMarker(callback.data[0]);
+                        var marker = mapService.pushMarker($scope.location);
                         marker.addTo($rootScope.map);
                         $scope.$on('$destroy', function () {
                             marker.remove();
                         })
                     }
                 });
-
             }
-        });
-
-        commentsService.getComments($stateParams.city, $stateParams.id).then(function (callback) {
-            $scope.comments = callback.data;
         });
     }
 })();

@@ -12,7 +12,6 @@
             var arr = $rootScope.cities.filter(function (value) {
                 return input === value.code;
             });
-
             return arr[0].name;
         };
     }

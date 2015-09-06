@@ -42,8 +42,7 @@
                             $compile(angular.element('.baloon-dialog'))($scope);
                             $scope.$apply();
 
-                            $rootScope.$on('locationAdded', function (data) {
-                                console.log(data);
+                            $rootScope.$on('locationAdded', function () {
                                 popup.remove();
 
                                 location.geo = geo;
