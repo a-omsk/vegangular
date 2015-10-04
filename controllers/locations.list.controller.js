@@ -10,22 +10,10 @@
 
     function locationsListController($rootScope, $scope, $stateParams, citiesListService, locationService, mapService) {
 
-        /**
-         *       Get the map object from a root scope
-         */
-
         $rootScope.$watch('map', function (map) {
             if (map) {
 
-                /**
-                 *       Save current city value to a variable
-                 */
-
                 var currentCity = citiesListService.getCurrentCity();
-
-                /**
-                 *       Get all locations for selected city and render on map
-                 */
 
                 locationService.getLocations($stateParams.city).then(function (callback) {
                     $scope.locations = callback.data;
@@ -37,9 +25,7 @@
                     }
 
                     angular.forEach(callback.data, function(value){
-
                         markerArray.push(mapService.pushMarker(value));
-
                     });
 
                     mapService.cluster = DG.featureGroup(markerArray);
@@ -51,10 +37,6 @@
                     });
                 });
 
-                /**
-                 *       Pan the map, if controller launched for a new city
-                 */
-
                 var newCity = $rootScope.cities.filter(function (value) {
                     return value.code === $stateParams.city;
                 });
@@ -64,9 +46,7 @@
                     map.panTo([centroid.lat, centroid.lng]);
                 }
                 citiesListService.saveCurrentCity(newCity[0].code);
-
             }
-
         });
     }
 })();

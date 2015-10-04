@@ -1,74 +1,66 @@
 ;
 (function () {
-    'use strict';
+	'use strict';
 
-    angular
-        .module('mapApp.services')
-        .service('mapService', mapService);
+	angular
+		.module('mapApp.services')
+		.service('mapService', mapService);
 
-    mapService.$inject = ['$rootScope', '$http', '$location', 'API_KEY'];
+	mapService.$inject = ['$rootScope', '$http', '$location', 'API_KEY'];
 
-    function mapService($rootScope, $http, $location, API_KEY) {
-        var map = null,
-            vm = this;
+	function mapService($rootScope, $http, $location, API_KEY) {
+		var vm = this,
+			map = null;
 
-        vm.cluster = null;
+		vm.cluster = null;
 
-        this.saveMapContainer = function (data) {
-            map = data;
-        };
+		this.saveMapContainer = function (data) {
+			map = data;
+		};
 
-        this.getMapContainer = function () {
-            return map;
-        };
+		this.getMapContainer = function () {
+			return map;
+		};
 
-        this.filterMarker = function (prop, id) {
-            var marker = vm.cluster._layers[prop];
-            if (marker.cityId !== id) {
-                vm.cluster.removeLayer(prop);
-            }
-        };
+		this.filterMarker = function (prop, id) {
+			var marker = vm.cluster._layers[prop],
+				latlng = [marker._latlng.lat, marker._latlng.lng];
 
-        this.pushMarker = function (value) {
+			if (marker.cityId === id) {
+				$rootScope.map.panTo(latlng, {animate: true});
+			} else {
+				vm.cluster.removeLayer(prop);
+			}
+		};
 
-            var veganIcon = DG.icon({
-                    iconUrl: 'resources/icons/marker1.svg',
-                    iconSize: [56, 56]
-                }),
-                id,
-                geo,
-                marker;
+		this.pushMarker = function (value) {
+			var geo = value.geo ? value.geo : value.coordinates.replace(/[\[\]]/g, '').split(','),
+				id = value.id ? value.id : '',
 
-            if (value.geo) {
-                geo = value.geo;
-            } else {
-                geo = value.coordinates.replace(/[\[\]]/g, '').split(',');
-            }
+				veganIcon = DG.icon({
+					iconUrl: 'resources/icons/marker1.svg',
+					iconSize: [56, 56]
+				}),
 
-            if (value.id) {
-                id = value.id;
-            } else {
-                id = '';
-            }
+				marker = DG.marker(geo, {
+					icon: veganIcon
+				});
 
-            marker = DG.marker(geo, {
-                icon: veganIcon
-            });
+			marker.cityId = id;
 
-            marker.on('click', function () {
-                $rootScope.$apply(function () {
-                    $location.path('/locations/' + value.city + '/' + id);
-                });
-            });
-            marker.cityId = id;
+			marker.on('click', function () {
+				$rootScope.$apply(function () {
+					$location.path('/locations/' + value.city + '/' + id);
+				});
+			});
 
-            return marker;
-        };
+			return marker;
+		};
 
-        this.getObject = function (latlng) {
-            return $http.get("http://catalog.api.2gis.ru/geo/search?q=" + latlng.lng + ',' + latlng.lat + "&version=1.3&key=" + API_KEY).success(function (data) {
-                return data;
-            });
-        }
-    }
+		this.getObject = function (latlng) {
+			return $http.get("http://catalog.api.2gis.ru/geo/search?q=" + latlng.lng + ',' + latlng.lat + "&version=1.3&key=" + API_KEY).success(function (data) {
+				return data;
+			});
+		}
+	}
 })();
