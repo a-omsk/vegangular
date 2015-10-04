@@ -19,6 +19,7 @@
     "angular": "~1.4.4",
     "angular-adaptive-detection": "latest",
     "angular-bootstrap-slider": "~0.1.18",
+    "angular-mocks": "~1.4.7",
     "angular-touch": "~1.4.4",
     "bootstrap": "~3.3.4",
     "checklist-model": "~0.2.4",

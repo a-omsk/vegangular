@@ -11,6 +11,7 @@ var gulp = require('gulp'),
     vendor = [
         src.bower + 'jquery/dist/jquery.min.js',
         src.bower + 'angular/angular.min.js',
+        src.bower + 'angular-mocks/angular-mocks.js',
         src.bower + 'ui-router/release/angular-ui-router.min.js',
         src.bower + 'angular-touch/angular-touch.min.js',
         src.bower + 'ngstorage/ngStorage.min.js',
@@ -79,7 +80,5 @@ gulp.task('app:watch', function () {
 
 gulp.task('default', function () {
     gulp.run('vendor', 'styles', 'sass', 'sass:watch', 'app', 'app:watch', 'webserver');
-    
+
 });
-
-
