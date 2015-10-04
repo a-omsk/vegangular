@@ -1,13 +1,12 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
     webserver = require('gulp-webserver'),
+    karmaServer = require('karma').Server,
     uglify = require('gulp-uglify'),
     sass = require('gulp-ruby-sass'),
-
     src = {
         bower: 'bower_components/'
     },
-
     vendor = [
         src.bower + 'jquery/dist/jquery.min.js',
         src.bower + 'angular/angular.min.js',
@@ -21,7 +20,6 @@ var gulp = require('gulp'),
         src.bower + 'angular-bootstrap-slider/slider.js',
         src.bower + 'angular-adaptive-detection/angular-adaptive-detection.min.js'
     ],
-
     app = [
         '**/*.module.js',
         'app.config.js',
@@ -32,7 +30,6 @@ var gulp = require('gulp'),
         'filters/*.js',
         'mapsize.js'
     ],
-
     styles = [
         src.bower + 'normalize.css/normalize.css',
         src.bower + 'bootstrap/dist/css/bootstrap.min.css',
@@ -46,6 +43,13 @@ gulp.task('webserver', function () {
             livereload: true,
             directoryListing: false
         }));
+});
+
+gulp.task('unit-tests', function (done) {
+  new karmaServer({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
 });
 
 gulp.task('vendor', function () {
@@ -79,6 +83,5 @@ gulp.task('app:watch', function () {
 });
 
 gulp.task('default', function () {
-    gulp.run('vendor', 'styles', 'sass', 'sass:watch', 'app', 'app:watch', 'webserver');
-
+    gulp.run('styles', 'sass', 'sass:watch', 'app', 'app:watch', 'unit-tests', 'webserver');
 });

@@ -5,7 +5,9 @@
     angular
         .module('mapApp.filters')
         .filter('city', city);
+        
     city.$inject = ['$rootScope'];
+
     function city($rootScope) {
         return function (input) {
             if (input && angular.isString(input))

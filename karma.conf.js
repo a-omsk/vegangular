@@ -56,16 +56,16 @@ module.exports = function(config) {
     autoWatch: true,
 
 
-    plugins: ['karma-jasmine', 'karma-firefox-launcher'],
+    plugins: ['karma-jasmine', 'karma-phantomjs-launcher'],
 
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Firefox'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: true
   })
 }
