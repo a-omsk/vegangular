@@ -10,6 +10,7 @@
             'mapApp.filters',
             'ui.router',
             'ngTouch',
+            'ngDialog',
             'ngStorage',
             'checklist-model',
             'ui.bootstrap-slider',

@@ -33,25 +33,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="user in users | filter:search">
+        <tr ng-repeat="user in vm.users | filter:search">
+            <td ng-bind="::user.id"></td>
+            <td ng-bind="::user.name"></td>
+            <td ng-bind="::user.role"></td>
+            <td ng-bind="::user.email"></td>
+            <td ng-bind="::user.created_at"></td>
             <td>
-                {{::user.id}}
-            </td>
-            <td>
-                {{::user.name}}
-            </td>
-            <td>
-                {{::user.role}}
-            </td>
-            <td>
-                {{::user.email}}
-            </td>
-            <td>
-                {{::user.created_at}}
-            </td>
-            <td>
-                <span class="glyphicon glyphicon-edit"></span>
-                <span class="glyphicon glyphicon-remove"></span>
+                <span ng-click="user.updateUser()" class="glyphicon glyphicon-edit"></span>
+                <span ng-click="user.deleteUser()" class="glyphicon glyphicon-remove"></span>
             </td>
         </tr>
         </tbody>

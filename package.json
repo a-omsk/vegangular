@@ -4,6 +4,7 @@
   "description": "vegan locations map service ",
   "main": "app.config.js",
   "dependencies": {
+    "bower": "^1.5.3",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-livereload": "^3.8.0",

@@ -12,7 +12,15 @@
         this.getUsers = function () {
             return $http.get(API_HOST + 'users', {cache: true}).success(function(data){
                 return data;
-            })
+            });
+        };
+
+        this.deleteUser = function(name) {
+            console.info("user '" + name + "' deleted");
+        };
+
+        this.updateUser = function(name) {
+            console.info("user '" + name + "' updated");
         };
     }
 

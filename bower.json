@@ -1,7 +1,7 @@
 {
   "name": "angular.js frontend",
   "version": "0.0.1",
-  "homepage": "https://github.com/a-omsk/laravel-dev",
+  "homepage": "https://github.com/a-omsk/vegangular",
   "authors": [
     "a-omsk <a-omsk@riseup.net>"
   ],
@@ -24,6 +24,7 @@
     "bootstrap": "~3.3.4",
     "checklist-model": "~0.2.4",
     "jquery": "~2.1.4",
+    "ng-dialog": "~0.5.5",
     "ngstorage": "~0.3.7",
     "normalize.css": "~3.0.3",
     "ui-router": "~0.2.15"

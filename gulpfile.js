@@ -13,6 +13,7 @@ var gulp = require('gulp'),
         src.bower + 'angular-mocks/angular-mocks.js',
         src.bower + 'ui-router/release/angular-ui-router.min.js',
         src.bower + 'angular-touch/angular-touch.min.js',
+        src.bower + 'ng-dialog/js/ngDialog.min.js',
         src.bower + 'ngstorage/ngStorage.min.js',
         src.bower + 'checklist-model/checklist-model.js',
         src.bower + 'raty/lib/jquery.raty.js',
@@ -33,7 +34,9 @@ var gulp = require('gulp'),
     styles = [
         src.bower + 'normalize.css/normalize.css',
         src.bower + 'bootstrap/dist/css/bootstrap.min.css',
-        src.bower + 'seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css'
+        src.bower + 'seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css',
+        src.bower + 'ng-dialog/css/ngDialog.min.css',
+        src.bower + 'ng-dialog/css/ngDialog-theme-default.min.css'
     ];
 
 gulp.task('webserver', function () {
