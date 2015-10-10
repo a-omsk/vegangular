@@ -11,7 +11,7 @@
     function enableTagging($compile, $rootScope, mapService, citiesListService) {
         return {
             restrict: 'A',
-            controller: function ($scope) {
+            controller: ['$scope', function ($scope) {
                 $rootScope.$watch('map', function (map) {
                     if (map) {
 
@@ -58,7 +58,7 @@
                         });
                     }
                 });
-            }
+            }]
         };
     }
 })();

@@ -20,7 +20,7 @@
                     }
                 });
             },
-            controller: function ($scope) {
+            controller: ['$scope', function ($scope) {
                 var city = citiesListService.getCurrentCity();
                 $scope.locationData = {};
                 $scope.locationData.coordinates = $rootScope.latlng.lat + ', ' + $rootScope.latlng.lng;
@@ -55,8 +55,8 @@
                 $scope.close = function () {
                     $rootScope.openForm = false;
                 };
-            }
-        }
+            }]
+        };
     }
 
 })();

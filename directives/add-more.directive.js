@@ -15,9 +15,9 @@
             scope: {
                 location: '@'
             },
-            controller: function ($scope) {
+            controller: ['$scope', function ($scope) {
                 console.log($scope);
-            }
+            }]
         };
     }
 
