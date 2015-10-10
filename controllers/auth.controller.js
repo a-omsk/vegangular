@@ -6,39 +6,46 @@
         .module('mapApp.controllers')
         .controller('AuthController', AuthController);
 
-    AuthController.$inject = ['authService', '$localStorage', '$location'];
+    AuthController.$inject = ['authService', '$scope', '$localStorage', '$location', 'popupService'];
 
-    function AuthController(authService, $localStorage, $location) {
-        function successAuth (res) {
-            $localStorage.token = res.token;
-            console.info('Your token:', $localStorage.token);
-            vm.showModal = false;
-        }
+    function AuthController(authService, $scope, $localStorage, $location, popupService) {
 
         var vm = this;
 
         vm.credentials = {};
+        vm.showPopup = showPopup;
+        vm.goAdminRoom = goAdminRoom;
+        vm.checkLogin = checkLogin;
+        vm.login = login;
+        vm.logout = logout;
 
-        vm.showModal = false;
+        function logout () {
+            authService.logout();
+        }
 
-        vm.goAdminRoom = function () {
-            $location.path('/admin/locations');
-        };
-
-        vm.checkLogin = function () {
-            return !!$localStorage.token;
-        };
-
-        vm.login = function () {
-            console.log(vm.credentials);
+        function login () {
             authService.loginThis(vm.credentials, successAuth, function () {
                 console.error('Invalid credentials.');
             });
-        };
+        }
 
-        vm.logout = function () {
-            authService.logout();
-        };
+        function successAuth (res) {
+            $localStorage.token = res.token;
+            $scope.$emit('userLoginSuccess');
+            popupService.closePopup();
+        }
+
+        function showPopup() {
+            popupService.loginPopup();
+        }
+
+        function goAdminRoom () {
+            $location.path('/admin/locations');
+        }
+
+        function checkLogin () {
+            return !!$localStorage.token;
+        }
     }
 
 })();

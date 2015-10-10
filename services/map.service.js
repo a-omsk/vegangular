@@ -9,18 +9,9 @@
 	mapService.$inject = ['$rootScope', '$http', '$location', 'API_KEY'];
 
 	function mapService($rootScope, $http, $location, API_KEY) {
-		var vm = this,
-			map = null;
+		var vm = this;
 
 		vm.cluster = null;
-
-		this.saveMapContainer = function (data) {
-			map = data;
-		};
-
-		this.getMapContainer = function () {
-			return map;
-		};
 
 		this.filterMarker = function (prop, id) {
 			var marker = vm.cluster._layers[prop],
@@ -34,8 +25,8 @@
 		};
 
 		this.pushMarker = function (value) {
-			var geo = value.geo ? value.geo : value.coordinates.replace(/[\[\]]/g, '').split(','),
-				id = value.id ? value.id : '',
+			var geo = value.geo || value.coordinates.replace(/[\[\]]/g, '').split(','),
+				id = value.id || '',
 
 				veganIcon = DG.icon({
 					iconUrl: 'resources/icons/marker1.svg',
@@ -53,6 +44,10 @@
 					$location.path('/locations/' + value.city + '/' + id);
 				});
 			});
+
+			marker.on('dblclick', function(){
+				marker.bindPopup('Добавить еще одно заведение в этом месте?').openPopup();
+			})
 
 			return marker;
 		};

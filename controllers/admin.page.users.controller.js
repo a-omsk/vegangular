@@ -11,6 +11,8 @@
     function adminPageUsersController($scope, usersService) {
         var vm = this;
 
+        vm.users = [];
+
         activate();
 
         function VegUser() {
@@ -25,11 +27,9 @@
 
         function activate() {
             usersService.getUsers().then(function(users){
-                vm.users = [];
-
-                angular.forEach(users.data, function(user){
-                    vm.users.push(angular.merge(new VegUser(), user));
-                });
+                vm.users = users.data.map(function(user){
+                    return angular.extend(new VegUser(), user);
+                })
             });
         }
     }

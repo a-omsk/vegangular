@@ -4,7 +4,6 @@
 
     angular
         .module('mapApp')
-        .config(configure)
         .run(init);
 
     init.$inject = ['$window', 'citiesListService', 'authService', 'mapService', '$location', '$localStorage', '$rootScope', '$detection'];
@@ -28,9 +27,7 @@
             $rootScope.isAdaptive = true;
             minZoom = 14;
             zoom = 15
-        }
-
-        else {
+        } else {
             minZoom = 13;
             zoom = 14;
         }
@@ -42,10 +39,10 @@
 
                 var cityObj = callback.data.result.filter(function (value) {
                     return value.code === currentCity
-                });
+                })[0];
 
-                if (cityObj.length > 0) {
-                    centroid = DG.Wkt.toLatLngs(cityObj[0].centroid)[0];
+                if (cityObj) {
+                    centroid = DG.Wkt.toLatLngs(cityObj.centroid)[0];
                 } else {
                     centroid = {
                         lat: 54.981307,
@@ -56,8 +53,6 @@
 
                 citiesListService.saveCurrentCity(currentCity);
 
-                $rootScope.currentCity = currentCity;
-
                 var map = DG.map('map', {
                     center: [centroid.lat, centroid.lng],
                     zoom: zoom,
@@ -67,9 +62,8 @@
                     doubleClickZoom: false
                 });
 
+                $rootScope.currentCity = currentCity;
                 $rootScope.map = map;
-
-                mapService.saveMapContainer(map);
 
                 //Add geolocation of user.
                 DG.control.location({
@@ -78,11 +72,4 @@
             });
         });
     }
-
-    configure.$inject = ['$stateProvider', '$urlRouterProvider'];
-
-    function configure($stateProvider, $urlRouterProvider) {
-
-    }
 })();
- 

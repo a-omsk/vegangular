@@ -1,5 +1,5 @@
 ;
-(function () {
+(function() {
     'use strict';
 
     angular
@@ -10,42 +10,36 @@
 
     function locationsListController($rootScope, $scope, $stateParams, citiesListService, locationService, mapService) {
 
-        $rootScope.$watch('map', function (map) {
+        var vm = this;
+
+        $rootScope.$watch('map', function(map) {
             if (map) {
 
                 var currentCity = citiesListService.getCurrentCity();
 
-                locationService.getLocations($stateParams.city).then(function (callback) {
-                    $scope.locations = callback.data;
-
-                    var markerArray = [];
+                locationService.getLocations($stateParams.city).then(function(callback) {
+                    vm.locations = callback.data;
 
                     if (mapService.cluster) {
                         mapService.cluster.clearLayers();
                     }
 
-                    angular.forEach(callback.data, function(value){
-                        markerArray.push(mapService.pushMarker(value));
-                    });
+                    mapService.cluster = DG.featureGroup(callback.data.map(function(value) {
+                        return mapService.pushMarker(value);
+                    }));
 
-                    mapService.cluster = DG.featureGroup(markerArray);
-
-                    $rootScope.$watch('map', function (map) {
-
-                        mapService.cluster.addTo(map);
-
-                    });
+                    mapService.cluster.addTo(map);
                 });
 
-                var newCity = $rootScope.cities.filter(function (value) {
+                var newCity = $rootScope.cities.filter(function(value) {
                     return value.code === $stateParams.city;
-                });
+                })[0];
 
                 if (currentCity !== $stateParams.city) {
-                    var centroid = DG.Wkt.toLatLngs(newCity[0].centroid)[0];
+                    var centroid = DG.Wkt.toLatLngs(newCity.centroid)[0];
                     map.panTo([centroid.lat, centroid.lng]);
                 }
-                citiesListService.saveCurrentCity(newCity[0].code);
+                citiesListService.saveCurrentCity(newCity.code);
             }
         });
     }

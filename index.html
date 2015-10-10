@@ -7,80 +7,51 @@
     <link rel='stylesheet' type='text/css' href='css/normalize.css'>
     <link rel='stylesheet' type='text/css' href='css/bootstrap.min.css'>
     <link rel='stylesheet' type='text/css' href='css/bootstrap-slider.min.css'>
+    <link rel='stylesheet' type='text/css' href='css/ngDialog.min.css'>
+    <link rel='stylesheet' type='text/css' href='css/ngDialog-theme-default.min.css'>
     <link rel='stylesheet' type='text/css' href='css/global.css'>
 
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 
 <body ng-cloak>
-<div class='container-fluid'>
-    <div ui-view="admin"></div>
-    <div class='content' adaptive-menu>
-        <add-location-form ng-if="$root.openForm" class="form--add-location-popup" adaptive-style></add-location-form>
-        <div class='sidebar' ng-swipe-left="$root.swipeLeft()">
-            <div class='control-panel'>
-                <input class='form-control' placeholder='поиск' type='text' ng-model='search'>
-            </div>
-            <div>
-                <div ng-controller='ShowCityController' ng-show='$root.showCityList' class="citylist">
-                    <ul class='citylist--list'>
-                        <li ng-click='$root.showCityList = ! $root.showCityList' ui-sref='location({ city: city.code })'
-                            class='list-group-item'
-                            ng-repeat='city in cities | filter:search'>
-                            <span class="glyphicon glyphicon-map-marker"></span>
-                            <span class='list-title'>{{city.name}}</span>
-                        </li>
-                    </ul>
+    <div class='container-fluid'>
+        <div ui-view="admin"></div>
+        <div class='content' adaptive-menu>
+            <add-location-form ng-if="$root.openForm" class="form--add-location-popup" adaptive-style></add-location-form>
+            <div class='sidebar' ng-swipe-left="$root.swipeLeft()">
+                <div class='control-panel'>
+                    <input class='form-control' placeholder='поиск' type='text' ng-model='search'>
                 </div>
-                <div class='location-container' ui-view></div>
+                <div>
+                    <div ng-controller='ShowCityController' ng-show='$root.showCityList' class="citylist">
+                        <ul class='citylist--list'>
+                            <li ng-click='$root.showCityList = ! $root.showCityList' ui-sref='location({ city: city.code })' class='list-group-item' ng-repeat='city in cities | filter:search'>
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                <span class='list-title'>{{city.name}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class='location-container' ui-view></div>
+                </div>
             </div>
-        </div>
-        <div class="control-tools">
-
-        </div>
-        <div ng-controller="AuthController as ac">
-            <div class="control-tools login-status">
+            <div ng-controller="AuthController as vm" class="control-tools login-status">
                 <div class="btn-group buttons--control" role="group">
-                    <button ng-if="ac.checkLogin() === true" ng-click="ac.goAdminRoom()"
-                            class="control-tools--authbutton btn btn-primary"><span
-                            class="glyphicon glyphicon-home"></span> Личный кабинет
+                    <button ng-if="vm.checkLogin() === true" ng-click="vm.goAdminRoom()" class="control-tools--authbutton btn btn-primary">
+                        <span class="glyphicon glyphicon-home"></span> Личный кабинет
                     </button>
-                    <!--                    <button ng-if="ac.checkLogin() === true" class="control-tools&#45;&#45;authbutton btn btn-danger"
-                                                ng-click="ac.logout()">Выйти
-                                        </button>-->
-                    <button ng-if="ac.checkLogin() === false" class="control-tools--authbutton btn btn-default"
-                            ng-click='ac.showModal = ! ac.showModal'><span class="glyphicon glyphicon-user"></span>
+                    <button ng-if="vm.checkLogin() === false" class="control-tools--authbutton btn btn-default" ng-click='vm.showPopup()'>
+                        <span class="glyphicon glyphicon-user"></span>
                         Войти
                     </button>
-                    <button class="control-tools--citybutton btn btn-default"
-                            ng-click='$root.showCityList = ! $root.showCityList'>
+                    <button class="control-tools--citybutton btn btn-default" ng-click='$root.showCityList = ! $root.showCityList'>
                         <span class="glyphicon glyphicon-map-marker"></span> Сменить город
                     </button>
                 </div>
             </div>
-            <div class="auth-modal modal-dialog card card-container" adaptive-style ng-show="ac.showModal">
-                <div class='modal-body'>
-                    <form name="loginForm " ng-submit="ac.login()">
-                        <div class="form-group">
-                            <input type="text" class="form-control" ng-model="ac.credentials.email"
-                                   placeholder="Электронный ящик"/>
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" ng-model="ac.credentials.password"
-                                   placeholder="Пароль"/>
-                        </div>
-                        <button type="submit" class="login-form-submit btn btn-primary">Войти</button>
-                    </form>
-                </div>
-            </div>
         </div>
+        <div ng-controller='MapController' id='map' enable-tagging></div>
     </div>
-    <div ng-controller='MapController' id='map' enable-tagging>
-        <!--
-                <location-marker ng-if="locations" ng-repeat="location in locations"></location-marker>
-        -->
-    </div>
-</div>
 </body>
 <script src='http://maps.api.2gis.ru/2.0/loader.js?pkg=full' data-id='dgLoader'></script>
 <script src='js/vendor.js'></script>

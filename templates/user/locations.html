@@ -7,9 +7,9 @@
 <div class='user-cities-list'>
     <div ng-if="!showEditForm" class="form-group">
         <label for="sel1">Выберите город:</label>
-        <select ng-model='manageCity' class="form-control" id="sel1">
+        <select ng-model='vm.manageCity' class="form-control" id="sel1">
             <option ng-selected value='all'>Не выбран (Все добавленные заведения)</option>
-            <option ng-repeat='city in cities' ng-value='city.code'>{{city.name}}</option>
+            <option ng-repeat='city in vm.cities' ng-value='city.code'>{{city.name}}</option>
         </select>
     </div>
 </div>
@@ -20,46 +20,24 @@
     <table class="table">
         <thead>
         <tr>
-            <th>
-                #
-            </th>
-            <th>
-                Город
-            </th>
-            <th>
-                Название заведения
-            </th>
-            <th>
-                Тип
-            </th>
-            <th>
-                Представлена еда
-            </th>
-            <th>
-
-            </th>
+            <th>#</th>
+            <th>Город</th>
+            <th>Название заведения</th>
+            <th>Тип</th>
+            <th>Представлена еда</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="location in locations">
+            <td ng-bind='::location.id'></td>
+            <td ng-bind='::location.city | city'></td>
+            <td ng-bind='location.name'></td>
+            <td ng-bind='location.type | locationDetails'></td>
+            <td ng-bind='location.specification | locationDetails'></td>
             <td>
-                {{::location.id}}
-            </td>
-            <td>
-                {{::location.city | city}}
-            </td>
-            <td>
-                {{location.name}}
-            </td>
-            <td>
-                {{location.type | locationDetails}}
-            </td>
-            <td>
-                {{location.specification | locationDetails}}
-            </td>
-            <td>
-                <span ng-click="editLocation(location.id)" class="glyphicon glyphicon-edit"></span>
-                <span ng-click="deleteLocation(location.city, location.id)" class="glyphicon glyphicon-remove"></span>
+                <span ng-click="vm.editLocation(location.id)" class="glyphicon glyphicon-edit"></span>
+                <span ng-click="vm.deleteLocation(location.city, location.id)" class="glyphicon glyphicon-remove"></span>
             </td>
         </tr>
         </tbody>

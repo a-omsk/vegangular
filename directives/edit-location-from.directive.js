@@ -17,12 +17,9 @@
             controller: 'adminPageController',
             link: function (scope, elem, attrs) {
 
-                var selectedLocation = scope.locations.filter(function (value) {
-
+                scope.locationData = scope.locations.filter(function (value) {
                     return value.id == attrs.selectedid;
-                });
-
-                scope.locationData = selectedLocation[0];
+                })[0];
 
                 scope.valueRange = {};
                 scope.valueRange.min = 50;
@@ -41,11 +38,10 @@
 
                 if (scope.locationData.specification) {
                     scope.locationData.specification = scope.locationData.specification.split(",");
-                }   
+                }
 
                 scope.addLocation = function () {
                     scope.locationData.specification = scope.locationData.specification.toString();
-                    console.log(scope.locationData);
                     locationService.updateLocation(scope.locationData.city, scope.locationData.id, scope.locationData).then(function () {
                         scope.locationData.specification = scope.locationData.specification.split(",");
                         scope.$parent.$parent.showEditForm = false;
@@ -53,6 +49,7 @@
                 };
 
                 scope.close = function () {
+                    scope.locationData.specification = scope.locationData.specification.toString();
                     scope.$parent.$parent.showEditForm = false;
                 };
 

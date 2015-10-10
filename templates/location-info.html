@@ -1,12 +1,12 @@
 <ul class='locations-list list-group'>
-    <div ng-if="!locations.length" class="message-block">
+    <div ng-if="!vm.locations.length" class="message-block">
         <h5 class="message-block--text">Извините, заведения в данном городе еще не добавлены</h5>
     </div>
     <li class='list-group-item' ui-sref='location-details({ city: location.city, id: location.id })'
-        ng-repeat='location in locations | filter:search'>
-        <h4 class='list-title'>{{::location.name}}</h4>
-        <div class='list-type'>{{::location.type | locationDetails}}</div>
-        <div class='list-time'>Время работы: {{::location.time}}</div>
+        ng-repeat='location in vm.locations | filter:search'>
+        <h4 class='list-title' ng-bind="::location.name"></h4>
+        <div class='list-type' ng-bind="::location.type | locationDetails"></div>
+        <div class='list-time' ng-bind="'Время работы: ' + location.time"></div>
         <raty id='star-rating' score='{{location.rating}}'></raty>
     </li>
 </ul>

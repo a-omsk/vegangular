@@ -8,17 +8,8 @@
     locationService.$inject = ['$http', 'API_HOST'];
 
     function locationService ($http, API_HOST) {
-        var map = null;
-
+        
         this.cluster = null;
-
-        this.saveMapContainer = function (data) {
-            map = data;
-        };
-
-        this.getMapContainer = function () {
-            return map;
-        };
 
         this.getAllLocations = function () {
             return $http.get(API_HOST + 'locations', {cache: true}).success(function(data){

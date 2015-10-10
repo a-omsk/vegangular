@@ -34,7 +34,7 @@
                                 postComment.id_location = scope.location.id;
                                 commentsService.postNewComment(postComment).then(function (data) {
                                     postComment.created_at = Date.now();
-                                    scope.comments.push(postComment);
+                                    scope.comments.unshift(postComment);
                                 });
                             }
                         };

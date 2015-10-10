@@ -49,17 +49,16 @@
                                 location.city = citiesListService.getCurrentCity();
 
                                 marker = mapService.pushMarker(location);
-
-                                marker.addTo(map)
+                                marker.addTo(map);
                             });
 
                             $scope.$on('$destroy', function () {
                                 marker.remove();
-                            })
+                            });
                         });
                     }
-                })
+                });
             }
-        }
+        };
     }
 })();
