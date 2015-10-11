@@ -19,7 +19,6 @@
 
                 locationService.getLocations($stateParams.city).then(function(callback) {
                     vm.locations = callback.data;
-                    $rootScope.sidebarLoading = false;
 
                     if (mapService.cluster) {
                         mapService.cluster.clearLayers();

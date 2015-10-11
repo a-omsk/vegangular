@@ -20,9 +20,6 @@
         <div class='content' adaptive-menu>
             <add-location-form ng-if="$root.openForm" class="form--add-location-popup" adaptive-style></add-location-form>
             <div class='sidebar' ng-swipe-left="$root.swipeLeft()">
-                <div ng-if="$root.sidebarLoading" class="loader-container">
-                    <div class="loader loader__sidebar">Loading...</div>
-                </div>
                 <div class='control-panel'>
                     <input class='form-control' placeholder='поиск' type='text' ng-model='search'>
                 </div>

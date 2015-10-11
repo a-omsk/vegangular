@@ -33,9 +33,9 @@
                         controller: 'adminPageController',
                         controllerAs: 'vm',
                         resolve: {
-                            auth: function (authService) {
+                            auth: ['authService', function (authService) {
                                 return authService.checkLogin()
-                            }
+                            }]
                         }
                     }
                 }
@@ -46,9 +46,9 @@
                 controller: 'adminPageController',
                 controllerAs: 'vm',
                 resolve: {
-                    auth: function (authService) {
+                    auth: ['authService', function (authService) {
                         return authService.checkLogin()
-                    }
+                    }]
                 }
 
             })
@@ -58,9 +58,9 @@
                 controller: 'adminPageCommentsController',
                 controllerAs: 'vm',
                 resolve: {
-                    auth: function (authService) {
+                    auth: ['authService', function (authService) {
                         return authService.checkLogin()
-                    }
+                    }]
                 }
             })
             .state('admin.users', {
@@ -69,9 +69,9 @@
                 controller: 'adminPageUsersController',
                 controllerAs: 'vm',
                 resolve: {
-                    auth: function (authService) {
+                    auth: ['authService', function (authService) {
                         return authService.checkLogin()
-                    }
+                    }]
                 }
             })
             .state('admin.settings', {
@@ -80,9 +80,9 @@
                 controller: 'adminPageSettingsController',
                 controllerAs: 'vm',
                 resolve: {
-                    auth: function (authService) {
+                    auth: ['authService', function (authService) {
                         return authService.checkLogin()
-                    }
+                    }]
                 }
             })
     }

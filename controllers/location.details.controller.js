@@ -16,8 +16,6 @@
 		$q.all([getLocation, getComments]).then(function (response) {
 			$scope.location = response[0].data[0];
 			$scope.comments = response[1].data;
-			$rootScope.sidebarLoading = false;
-
 
 			if (mapService.cluster) {
 				var prop;

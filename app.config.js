@@ -17,7 +17,6 @@
 
         $rootScope.isAdaptive = false;
         $rootScope.mapLoading = true;
-        $rootScope.sidebarLoading = true;
 
         if ($localStorage.token) {
             authService.checkLogin().then(function (data) {
