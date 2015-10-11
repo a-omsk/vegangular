@@ -16,15 +16,18 @@
 		$q.all([getLocation, getComments]).then(function (response) {
 			$scope.location = response[0].data[0];
 			$scope.comments = response[1].data;
+			$rootScope.sidebarLoading = false;
+
 
 			if (mapService.cluster) {
 				var prop;
 
 				for (prop in mapService.cluster._layers) {
 					if (mapService.cluster._layers.hasOwnProperty(prop)) {
-						mapService.filterMarker(prop, $stateParams.id);
+						_.memoize(mapService.filterMarker(prop, $stateParams.id));
 					}
 				}
+
 			} else {
 				$rootScope.$watch('map', function (map) {
 					if (map) {
@@ -32,6 +35,7 @@
 						marker.addTo($rootScope.map);
 						$rootScope.$broadcast('adaptiveLocationSelected');
 						$rootScope.map.panTo([marker._latlng.lat, marker._latlng.lng], {animate: true});
+						$rootScope.mapLoading = false;
 						$scope.$on('$destroy', function () {
 							marker.remove();
 						})

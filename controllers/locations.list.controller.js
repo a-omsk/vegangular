@@ -19,6 +19,7 @@
 
                 locationService.getLocations($stateParams.city).then(function(callback) {
                     vm.locations = callback.data;
+                    $rootScope.sidebarLoading = false;
 
                     if (mapService.cluster) {
                         mapService.cluster.clearLayers();
@@ -29,6 +30,7 @@
                     }));
 
                     mapService.cluster.addTo(map);
+                    $rootScope.mapLoading = false;
                 });
 
                 var newCity = $rootScope.cities.filter(function(value) {
@@ -37,6 +39,7 @@
 
                 if (currentCity !== $stateParams.city) {
                     var centroid = DG.Wkt.toLatLngs(newCity.centroid)[0];
+                    $rootScope.mapLoading = true;
                     map.panTo([centroid.lat, centroid.lng]);
                 }
                 citiesListService.saveCurrentCity(newCity.code);

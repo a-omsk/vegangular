@@ -20,6 +20,9 @@
         <div class='content' adaptive-menu>
             <add-location-form ng-if="$root.openForm" class="form--add-location-popup" adaptive-style></add-location-form>
             <div class='sidebar' ng-swipe-left="$root.swipeLeft()">
+                <div ng-if="$root.sidebarLoading" class="loader-container">
+                    <div class="loader loader__sidebar">Loading...</div>
+                </div>
                 <div class='control-panel'>
                     <input class='form-control' placeholder='поиск' type='text' ng-model='search'>
                 </div>
@@ -34,6 +37,9 @@
                     </div>
                     <div class='location-container' ui-view></div>
                 </div>
+            </div>
+            <div ng-if="$root.mapLoading" class="loader-container">
+                <div class="loader loader--map">Loading...</div>
             </div>
             <div ng-controller="AuthController as vm" class="control-tools login-status">
                 <div class="btn-group buttons--control" role="group">
