@@ -27,10 +27,11 @@
     "ng-dialog": "~0.5.5",
     "ngstorage": "~0.3.7",
     "normalize.css": "~3.0.3",
-    "ui-router": "~0.2.15"
+    "ui-router": "~0.2.15",
+    "underscore": "~1.8.3"
   },
   "resolutions": {
     "jquery": "~2.1.4",
-    "angular": "1.4.5"
+    "angular": "1.4.7"
   }
 }

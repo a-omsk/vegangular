@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     },
     vendor = [
         src.bower + 'jquery/dist/jquery.min.js',
+        src.bower + 'underscore/underscore-min.js',
         src.bower + 'angular/angular.min.js',
         src.bower + 'angular-mocks/angular-mocks.js',
         src.bower + 'ui-router/release/angular-ui-router.min.js',

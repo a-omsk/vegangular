@@ -30,6 +30,7 @@
 					if (map) {
 						var marker = mapService.pushMarker($scope.location);
 						marker.addTo($rootScope.map);
+						$rootScope.$broadcast('adaptiveLocationSelected');
 						$rootScope.map.panTo([marker._latlng.lat, marker._latlng.lng], {animate: true});
 						$scope.$on('$destroy', function () {
 							marker.remove();

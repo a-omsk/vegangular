@@ -40,6 +40,9 @@
 			marker.cityId = id;
 
 			marker.on('click', function () {
+				if ($rootScope.isAdaptive) {
+					$rootScope.$broadcast('adaptiveLocationSelected');
+				}
 				$rootScope.$apply(function () {
 					$location.path('/locations/' + value.city + '/' + id);
 				});
