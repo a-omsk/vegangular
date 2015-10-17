@@ -11,3 +11,7 @@
 /js/app.js
 /js/vendor.js
 /.sass-cache
+/mock-list.json
+/mock-details.json
+/mock-comments.json
+

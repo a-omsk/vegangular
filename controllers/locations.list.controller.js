@@ -18,7 +18,7 @@
                 var currentCity = citiesListService.getCurrentCity();
 
                 locationService.getLocations($stateParams.city).then(function(callback) {
-                    vm.locations = callback.data;
+                    vm.locations = _.flatten(_.pluck(callback.data, 'locations'));
 
                     if (mapService.cluster) {
                         mapService.cluster.clearLayers();

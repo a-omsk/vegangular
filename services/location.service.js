@@ -8,7 +8,7 @@
     locationService.$inject = ['$http', 'API_HOST'];
 
     function locationService ($http, API_HOST) {
-        
+
         this.cluster = null;
 
         this.getAllLocations = function () {
@@ -19,13 +19,13 @@
 
         this.getLocations = function (city, id) {
             if (!id) {
-                return $http.get(API_HOST + 'locations/' + city, {cache: true}).success(function (data) {
+                return $http.get('mock-list.json', {cache: true}).success(function (data) {
                     return data;
                 });
 
             }
             else if (id) {
-                return $http.get(API_HOST + 'locations/' + city + '/' + id).success(function (data) {
+                return $http.get('mock-details.json').success(function (data) {
                     return data;
                 });
             }

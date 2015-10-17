@@ -1,31 +1,33 @@
 <div class='location-details-container'>
 
-    <button class='return-button btn btn-default btn-sm' ui-sref='location({ city: location.city})'><span class="glyphicon glyphicon-chevron-left"></span></button>
+    <button class='return-button btn btn-default btn-sm' ui-sref='location({ city: vm.locations.city})'><span class="glyphicon glyphicon-chevron-left"></span></button>
 
     <div class='location-details-name'>
-        <h1>{{::location.name}}</h1>
+        <h1>{{vm.selectedLocation.name}}</h1>
+        <button ng-if="vm.locations.length > 1" class='return-button btn btn-default btn-sm' ng-click="vm.changeLocation(vm.selectedLocation)"><span class="glyphicon glyphicon-chevron-right"></span></button>
 
-        <h2>{{::location.address}}</h2>
+
+        <h2>{{vm.selectedLocation.address}}</h2>
     </div>
     <div class='location-details-type'>
         <h4 class='location-type'>Тип заведения:</h4>
 
-        <p> {{location.type | locationDetails}}</p>
+        <p> {{vm.selectedLocation.type | locationDetails}}</p>
     </div>
     <div ng-hide='location.time == null' class='location-details-time'>
         <h4 class='location-time'>Время работы:</h4>
 
-        <p>{{::location.time}}</p>
+        <p>{{vm.selectedLocation.time}}</p>
     </div>
-    <div class='location-specification-desc'>
+    <div class='location-specificatvm.selectedLocation'>
         <h4 class='location-specification'>Представлена кухня:</h4>
 
-        <p>{{location.specification | locationDetails}}</p>
+        <p>{{vm.selectedLocation.specification | locationDetails}}</p>
     </div>
     <div class='location-details-desc'>
         <h4 class='location-name'>В меню:</h4>
 
-        <p>{{::location.description}}</p>
+        <p>{{vm.selectedLocation.description}}</p>
     </div>
 </div>
 <div class='location-comments'>
@@ -36,7 +38,7 @@
     </div>
 </div>
 <ul class='comments-list list-group'>
-    <li class='list-group-item' ng-repeat="comment in comments | orderBy:'-id'">
+    <li class='list-group-item' ng-repeat="comment in vm.comments | orderBy:'-id'">
         <div class='list-date'>{{::comment.created_at | date: 'mediumDate'}}</div>
         <div class='list-author'>{{::comment.author}}</div>
         <raty id='star-rating' score='{{::comment.rating}}'></raty>
