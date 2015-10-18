@@ -28,7 +28,9 @@
     "ngstorage": "~0.3.7",
     "normalize.css": "~3.0.3",
     "ui-router": "~0.2.15",
-    "underscore": "~1.8.3"
+    "underscore": "~1.8.3",
+    "ngInfiniteScroll": "~1.2.1",
+    "ng-dropdown": "~2.0.1"
   },
   "resolutions": {
     "jquery": "~2.1.4",

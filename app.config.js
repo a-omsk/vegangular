@@ -27,7 +27,7 @@
         if (($detection.isAndroid() || $detection.isiOS() || $detection.isWindowsPhone()) && $window.innerWidth < 640) {
             $rootScope.isAdaptive = true;
             minZoom = 14;
-            zoom = 15
+            zoom = 15;
         } else {
             minZoom = 13;
             zoom = 14;
@@ -39,7 +39,7 @@
                 $rootScope.cities = callback.data.result;
 
                 var cityObj = callback.data.result.filter(function (value) {
-                    return value.code === currentCity
+                    return value.code === currentCity;
                 })[0];
 
                 if (cityObj) {
@@ -60,8 +60,13 @@
                     minZoom: minZoom,
                     fullscreenControl: false,
                     zoomControl: false,
-                    doubleClickZoom: false
+                    doubleClickZoom: false,
+                    projectDetector: true
                 });
+
+                // map.on('projectchange', function(data){
+                //     map.setMaxBounds(data.getProject().bound);
+                // });
 
                 $rootScope.currentCity = currentCity;
                 $rootScope.map = map;

@@ -8,13 +8,13 @@
     locationService.$inject = ['$http', 'API_HOST'];
 
     function locationService ($http, API_HOST) {
-        
+
         this.cluster = null;
 
         this.getAllLocations = function () {
             return $http.get(API_HOST + 'locations', {cache: true}).success(function(data){
                 return data;
-            })
+            });
         };
 
         this.getLocations = function (city, id) {
@@ -35,7 +35,7 @@
             if (data) {
                 return $http.post(API_HOST + 'locations/post', data).success(function (response) {
                     console.log(response);
-                })
+                });
             }
         };
 
@@ -43,7 +43,7 @@
             if (city && id && data) {
                 return $http.put(API_HOST + 'locations/' + city + '/' + id, data).success(function (response) {
                     return response;
-                })
+                });
             }
         };
 
@@ -51,8 +51,8 @@
             if (city && id) {
                 return $http.delete(API_HOST + 'locations/' + city + '/' + id).success(function (response) {
                     return response;
-                })
+                });
             }
-        }
+        };
     }
 })();

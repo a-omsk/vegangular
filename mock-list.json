@@ -1,0 +1,145 @@
+[{
+    "id": 1,
+    "coordinates": "54.9769240537932, 73.39931488037111",
+    "city": "omsk",
+    "locations": [{
+        "id": 1,
+        "location_id": 1,
+        "name": "test88etst",
+        "type": "restaurant",
+        "specification": "vegetarian",
+        "time": "121221",
+        "description": "test",
+        "created_at": "2015-05-28 10:39:39",
+        "updated_at": "2015-10-06 16:41:55",
+        "price": "",
+        "address": "",
+        "voters": 14,
+        "created_by": "admin@admin.org",
+        "rating": 2
+    }, {
+        "id": 1,
+        "location_id": 2,
+        "name": "Another test place",
+        "type": "eatery",
+        "specification": "vegetarian",
+        "time": "every day",
+        "description": "test",
+        "created_at": "2015-05-28 10:44:44",
+        "updated_at": "2015-10-11 12:44:19",
+        "price": "",
+        "address": "",
+        "voters": 25,
+        "created_by": "admin@admin.org",
+        "rating": 4
+    }, {
+        "id": 1,
+        "location_id": 5,
+        "name": "test place",
+        "type": "cafe",
+        "specification": "vegetarian",
+        "time": "ergreg",
+        "description": "ewrgergergwrgw",
+        "created_at": "2015-05-28 10:57:11",
+        "updated_at": "2015-05-28 10:57:11",
+        "price": "",
+        "address": "",
+        "voters": 1,
+        "created_by": "admin@admin.org",
+        "rating": 1.5
+    }]
+}, {
+    "id": 15,
+    "coordinates": "54.98077221103936, 73.38499724864961",
+    "city": "omsk",
+    "locations": [{
+        "id": 15,
+        "location_id": 66,
+        "name": "\u041a\u0430\u0444\u0435 \u0422\u0430\u0440\u0430\u043a\u0430\u043d\u043e\u0432",
+        "type": "",
+        "specification": "vegetarian",
+        "time": "\u0441 10:00",
+        "description": "\u0412\u0441\u0435",
+        "created_at": "2015-07-04 06:32:37",
+        "updated_at": "2015-07-04 06:32:37",
+        "price": "",
+        "address": "",
+        "voters": 1,
+        "created_by": "admin@admin.org",
+        "rating": 4
+    }, {
+        "id": 15,
+        "location_id": 55,
+        "name": "\u043a\u043e\u0442\u0438\u043a\u0438 \u043f\u0440\u0438\u0432\u0435\u0442",
+        "type": "restaurant",
+        "specification": "vegan",
+        "time": "12:00-00:00",
+        "description": "\u0432\u0441\u0451",
+        "created_at": "2015-05-29 10:30:13",
+        "updated_at": "2015-10-10 18:25:11",
+        "price": "",
+        "address": "",
+        "voters": 2,
+        "created_by": "admin@admin.org",
+        "rating": 3
+    }]
+}, {
+    "id": 18,
+    "coordinates": "54.9892614806159, 73.3980703353882",
+    "locations": [{
+        "id": 18,
+        "location_id": 54,
+        "name": "\u0421\u0442\u043e\u043b\u043e\u0432\u0430\u044f",
+        "type": "",
+        "specification": "vegetarian",
+        "time": "34\u0435\u0443\u043f",
+        "description": "\u0430\u0439\u0446\u0443\u0444\u043f\u0444",
+        "created_at": "2015-07-04 07:06:25",
+        "updated_at": "2015-07-04 07:06:25",
+        "price": "",
+        "address": "",
+        "voters": 1,
+        "created_by": "admin@admin.org",
+        "rating": 1
+    }]
+}, {
+    "id": 24,
+    "coordinates": "54.992339089918964, 73.3729648590088",
+    "city": "omsk",
+    "locations": [{
+        "id": 24,
+        "location_id": 53,
+        "name": "\u0422\u043e\u0440\u0433\u043e\u0432\u044b\u0439 \u0426\u0435\u043d\u0442\u0440 \u043e\u043c\u0441\u043a\u0438\u0439",
+        "type": "coffee",
+        "specification": "vegetarian",
+        "time": "\u0441 9:00 \u0434\u043e 12:00",
+        "description": "\u04303\u0444\u0443\u0444\u044b\u0432",
+        "created_at": "2015-07-04 11:05:47",
+        "updated_at": "2015-08-29 10:02:52",
+        "price": "",
+        "address": "\u0418\u043d\u0442\u0435\u0440\u043d\u0430\u0446\u0438\u043e\u043d\u0430\u043b\u044c\u043d\u0430\u044f,43",
+        "voters": 5,
+        "created_by": "admin@admin.org",
+        "rating": 1
+    }]
+}, {
+    "id": 26,
+    "coordinates": "54.98180037621579, 73.40133190155031",
+    "locations": [{
+        "id": 26,
+        "location_id": 52,
+        "name": "\u0414\u043b\u044f \u0442\u0435\u0441\u0442\u0430 \u0430\u0434\u0440\u0435\u0441\u0430",
+        "type": "cafe",
+        "specification": "vegetarian",
+        "time": "\u043f\u0440\u043e\u0441\u0442",
+        "description": "\u0425\u0438\u0445\u0438\u043a",
+        "created_at": "2015-07-04 11:17:00",
+        "updated_at": "2015-07-04 11:17:00",
+        "price": "",
+        "address": "",
+        "voters": 1,
+        "created_by": "admin@admin.org",
+        "rating": 1
+    }]
+
+}]
