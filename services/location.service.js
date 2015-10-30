@@ -12,20 +12,21 @@
         this.cluster = null;
 
         this.getAllLocations = function () {
-            return $http.get(API_HOST + 'locations', {cache: true}).success(function(data){
+            return $http.get(API_HOST + 'map', {cache: true}).success(function(data){
                 return data;
             })
         };
 
         this.getLocations = function (city, id) {
+            console.log('worked');
             if (!id) {
-                return $http.get('mock-list.json', {cache: true}).success(function (data) {
+                return $http.get(API_HOST + 'map/' + city, {cache: true}).success(function (data) {
                     return data;
                 });
 
             }
             else if (id) {
-                return $http.get('mock-details.json').success(function (data) {
+                return $http.get(API_HOST + 'map/' + city + '/' + id).success(function (data) {
                     return data;
                 });
             }
@@ -33,7 +34,7 @@
 
         this.postLocation = function (data) {
             if (data) {
-                return $http.post(API_HOST + 'locations/post', data).success(function (response) {
+                return $http.post(API_HOST + 'map', data).success(function (response) {
                     console.log(response);
                 })
             }

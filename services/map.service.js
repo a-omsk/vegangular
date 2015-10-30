@@ -25,6 +25,7 @@
 		};
 
 		this.pushMarker = function (value) {
+			console.log(value);
 			var geo = value.geo || value.coordinates.replace(/[\[\]]/g, '').split(','),
 				id = value.id || '',
 

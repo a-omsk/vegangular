@@ -15,13 +15,12 @@
         vm.comments = [];
         vm.changeLocation = changeLocation;
 
-        var getLocation = locationService.getLocations($stateParams.city, $stateParams.id),
-            getComments = commentsService.getComments($stateParams.city, $stateParams.id);
+        var getLocation = locationService.getLocations($stateParams.city, $stateParams.id)
 
-        $q.all([getLocation, getComments]).then(function(response) {
-            vm.locations = response[0].data[0].locations;
-            vm.selectedLocation = vm.locations[0];
-            vm.comments = response[1].data;
+        $q.all([getLocation]).then(function(response) {
+            vm.markerModel = response[0].data[0];
+            vm.selectedLocation = vm.markerModel.locations[0];
+            vm.comments = vm.selectedLocation.comments;
 
             if (mapService.cluster) {
                 var prop;
@@ -35,7 +34,7 @@
             } else {
                 $rootScope.$watch('map', function(map) {
                     if (map) {
-                        var marker = mapService.pushMarker($scope.location);
+                        var marker = mapService.pushMarker(vm.markerModel);
                         marker.addTo($rootScope.map);
                         $rootScope.$broadcast('adaptiveLocationSelected');
                         $rootScope.map.panTo([marker._latlng.lat, marker._latlng.lng], {
@@ -51,12 +50,12 @@
         });
 
         function changeLocation(location) {
-            var index = _.indexOf(vm.locations, location);
+            var index = _.indexOf(vm.markerModel.locations, location);
 
-            if (vm.locations.length - 2 < index) {
-                vm.selectedLocation = vm.locations[0];
+            if (vm.markerModel.locations.length - 2 < index) {
+                vm.selectedLocation = vm.markerModel.locations[0];
             } else {
-                vm.selectedLocation = vm.locations[index + 1];
+                vm.selectedLocation = vm.markerModel.locations[index + 1];
             }
         }
     }
