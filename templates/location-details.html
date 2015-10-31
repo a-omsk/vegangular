@@ -1,6 +1,6 @@
 <div class='location-details-container'>
 
-    <button class='return-button btn btn-default btn-sm' ui-sref='location({ city: vm.locations.city})'><span class="glyphicon glyphicon-chevron-left"></span></button>
+    <button class='return-button btn btn-default btn-sm' ui-sref='location({ city: vm.markerModel.city})'><span class="glyphicon glyphicon-chevron-left"></span></button>
 
     <div class='location-details-name'>
         <h1>{{vm.selectedLocation.name}}</h1>
@@ -14,10 +14,10 @@
 
         <p> {{vm.selectedLocation.type | locationDetails}}</p>
     </div>
-    <div ng-hide='location.time == null' class='location-details-time'>
+    <div ng-hide='location.business_time == null' class='location-details-time'>
         <h4 class='location-time'>Время работы:</h4>
 
-        <p>{{vm.selectedLocation.time}}</p>
+        <p>{{vm.selectedLocation.business_time}}</p>
     </div>
     <div class='location-specificatvm.selectedLocation'>
         <h4 class='location-specification'>Представлена кухня:</h4>
