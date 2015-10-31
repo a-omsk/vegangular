@@ -19,7 +19,7 @@
             })
 
             .state('location-details', {
-                url: '/locations/{city}/{id:int}',
+                url: '/locations/{city}/{id:int}?location',
                 templateUrl: 'templates/location-details.html',
                 controller: 'locationDetailsController',
                 controllerAs: 'vm'

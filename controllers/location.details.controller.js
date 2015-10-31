@@ -14,6 +14,7 @@
         vm.markerModel = [];
         vm.selectedLocation = {};
         vm.comments = [];
+        vm.locationsReversed = false;
         vm.changeLocation = changeLocation;
 
         getLocations();
@@ -21,7 +22,11 @@
         function getLocations() {
             locationService.getSpecLocation($stateParams.city, $stateParams.id).then(function(response) {
                     vm.markerModel = response[0];
-                    vm.selectedLocation = _.first(vm.markerModel.locations);
+
+                    vm.selectedLocation = $stateParams.location ? _.find(vm.markerModel.locations, function(location) {
+                        return location.id === parseInt($stateParams.location);
+                    }) : _.first(vm.markerModel.locations);
+
                     vm.comments = vm.selectedLocation.comments;
 
                     renderMarker(_.pick(vm.markerModel, 'id', 'coordinates'));
@@ -66,7 +71,12 @@
                 });
             }
 
-        function changeLocation(location) {
+        function changeLocation(location, reverse) {
+            if ((reverse && !vm.locationsReversed) || (!reverse && vm.locationsReversed)){
+                vm.markerModel.locations = vm.markerModel.locations.reverse();
+                vm.locationsReversed = !vm.locationsReversed;
+            }
+
             var index = _.indexOf(vm.markerModel.locations, location);
 
             if (vm.markerModel.locations.length - 2 < index) {

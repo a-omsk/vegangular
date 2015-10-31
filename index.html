@@ -21,6 +21,7 @@
             <add-location-form ng-if="$root.openForm" class="form--add-location-popup" adaptive-style></add-location-form>
             <div class='sidebar' ng-swipe-left="$root.swipeLeft()">
                 <div class='control-panel'>
+                    <button back-button class='return-button btn btn-default btn-sm ng-hide'><span class="glyphicon glyphicon-chevron-left"></span></button>
                     <input class='form-control' placeholder='поиск' type='text' ng-model='search'>
                 </div>
                 <div>

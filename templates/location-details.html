@@ -1,10 +1,11 @@
 <div class='location-details-container'>
 
-    <button class='return-button btn btn-default btn-sm' ui-sref='location({ city: vm.markerModel.city})'><span class="glyphicon glyphicon-chevron-left"></span></button>
-
     <div class='location-details-name'>
-        <h1>{{vm.selectedLocation.name}}</h1>
-        <button ng-if="vm.locations.length > 1" class='return-button btn btn-default btn-sm' ng-click="vm.changeLocation(vm.selectedLocation)"><span class="glyphicon glyphicon-chevron-right"></span></button>
+        <div class="location-details__name">
+            <span ng-if="vm.markerModel.locations.length > 1"  ng-click="vm.changeLocation(vm.selectedLocation, true)" class="location-arrow location-arrow__left glyphicon glyphicon-chevron-left"></span>
+            <h1 class="location-details__name__title">{{vm.selectedLocation.name}}</h1>
+            <span ng-if="vm.markerModel.locations.length > 1"  ng-click="vm.changeLocation(vm.selectedLocation)" class="location-arrow location-arrow__right glyphicon glyphicon-chevron-right"></span>
+        </div>
 
 
         <h2>{{vm.selectedLocation.address}}</h2>

@@ -40,6 +40,10 @@ div.content {
   }
 }
 
+.control-panel{
+    display: flex;
+}
+
 .button {
 
   &--close-edit-form {
@@ -104,8 +108,20 @@ div.location-container {
 
   div.location-details-container {
     padding-left: 20px;
-
   }
+}
+
+.location-details__name {
+    display: flex;
+
+    &__title{
+        padding-left: 0.3em;
+    }
+
+    .location-arrow{
+        align-self: center;
+        cursor: pointer;
+    }
 }
 
 div.location-comments {

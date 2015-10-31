@@ -3,7 +3,7 @@
 </div>
 <div scroll-callback="vm.addMoreLocations" custom-infinite-scroll="vm.addMoreLocations()" class='location-container'>
     <ul class='locations-list list-group'>
-        <li class='list-group-item' ng-repeat='location in vm.locations | filter:search' ui-sref='location-details({ city: vm.stateCity, id: location.marker_id })'>
+        <li class='list-group-item' ng-repeat='location in vm.locations | filter:search' ui-sref='location-details({ city: vm.stateCity, id: location.marker_id, location: location.id })'>
             <h4 class='list-title' ng-bind="::location.name"></h4>
             <div class='list-type' ng-bind="::location.type | locationDetails"></div>
             <div class='list-time' ng-bind="'Время работы: ' + location.business_time"></div>
