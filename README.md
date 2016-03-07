@@ -1,6 +1,7 @@
-# Vegangular alpha app
+# Vegangular alpha app [DEPRECATED]
 
-
+Please look at the [actual react.js app implementation](https://github.com/a-omsk/Vegreact).
+    
 This application works correctly only with additional files (removed from this repo now)
 
   - app.key.js
